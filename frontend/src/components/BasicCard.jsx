@@ -9,12 +9,12 @@ import { CardHeader } from "@mui/material"
 
 export default function BasicCard({ title }) {
   return (
-    <Box sx={{ minWidth: 275 }}>
-      <Card variant="outlined" sx={{ margin: "1rem"}}>
+      <Card variant="outlined" sx={{ margin: "1rem", minWidth: "500px"}}>
         <CardHeader sx={{ backgroundColor: "#e87038", maxHeight: "1rem", color:"white"}} title={title} />
         <CardContent>
           <Typography sx={{ color: "text.secondary", mb: 1.5 }}>adjective</Typography>
-          <Typography variant="body2">
+          <Typography variant="body2"
+          >
             well meaning and kindly.
             <br />
             {'"a benevolent smile"'}
@@ -24,6 +24,5 @@ export default function BasicCard({ title }) {
           <Button size="small">Learn More</Button>
         </CardActions>
       </Card>
-    </Box>
   )
 }
