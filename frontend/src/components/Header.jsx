@@ -11,7 +11,7 @@ import Button from "@mui/material/Button"
 import Tooltip from "@mui/material/Tooltip"
 import MenuItem from "@mui/material/MenuItem"
 
-const pages = ["Products", "Allergens", `How it works`]
+const pages = ["User preferences", `How it works`]
 const settings = ["Profile", "Logout"]
 
 function Header() {
