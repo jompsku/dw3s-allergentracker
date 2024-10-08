@@ -16,4 +16,8 @@ productsRouter.post("/products", async (request, response) => {
   response.status(200).json({ products: prods })
 })
 
+productsRouter.get("/products", async (request, response) => {
+  response.status(200).json({ products: productList })
+})
+
 module.exports = productsRouter

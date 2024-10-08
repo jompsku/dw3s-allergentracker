@@ -7,8 +7,8 @@ import { Container } from "@mui/material"
 function LandingPage() {
   return (
     <Container sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-      <Info />
       <div className="cards">
+        <Info />
         <BasicCard title="Your top allergens" />
         <BasicCard title="Your products" />
       </div>
