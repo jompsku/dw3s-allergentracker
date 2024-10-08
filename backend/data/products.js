@@ -15,11 +15,21 @@ const products = [
       "Benzyl Benzoate",
     ],
   },
-  { id: 2, name: "Aqualan L", ingredients: ["Aqua", "Isopropyl Palmitate", "Cetyl Alcohol"] },
+  {
+    id: 2,
+    name: "Aqualan L",
+    ingredients: ["Aqua", "Isopropyl Palmitate", "Cetyl Alcohol"],
+  },
   {
     id: 3,
     name: "Dermosil",
-    ingredients: ["Aqua", "Isopropyl Palmitate", "Isohexadecane", "Sorbitan Stearate", "Cinnamals"],
+    ingredients: [
+      "Aqua",
+      "Isopropyl Palmitate",
+      "Isohexadecane",
+      "Sorbitan Stearate",
+      "Cinnamals",
+    ],
   },
   {
     id: 4,
@@ -33,6 +43,6 @@ const products = [
       "",
     ],
   },
-]
+];
 
-module.exports = products
+module.exports = products;
