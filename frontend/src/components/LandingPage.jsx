@@ -9,8 +9,8 @@ function LandingPage() {
     <Container sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
       <Info />
       <div className="cards">
-        <BasicCard title="Ingredients" />
-        <BasicCard title="Products" />
+        <BasicCard title="Your top allergens" />
+        <BasicCard title="Your products" />
       </div>
     </Container>
   )
