@@ -1,5 +1,6 @@
 const productsRouter = require("express").Router();
 const productList = require("../data/products");
+const { getPossibleAllergens } = require("../services/allergenService");
 
 productsRouter.post("/products", async (request, response) => {
   const { productIDs } = request.body;
@@ -18,6 +19,17 @@ productsRouter.post("/products", async (request, response) => {
 
 productsRouter.get("/products", async (request, response) => {
   response.status(200).json(productList);
+});
+
+productsRouter.get("/allergens", async (request, response) => {
+  const possibleAllergens = getPossibleAllergens();
+  // For the demo, in real application ingredients will have their own ids also
+  const res = possibleAllergens.map((item, index) => ({
+    id: index,
+    name: item,
+  }));
+
+  response.status(200).json(res);
 });
 
 module.exports = productsRouter;

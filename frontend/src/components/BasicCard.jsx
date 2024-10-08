@@ -26,7 +26,7 @@ export default function BasicCard({ title, contents }) {
         </List>
       </CardContent>
       <CardActions>
-        <Button size="small">Learn More</Button>
+        <Button size="small">View more</Button>
       </CardActions>
     </Card>
   );

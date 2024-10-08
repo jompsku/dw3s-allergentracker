@@ -3,10 +3,18 @@ import BasicCard from "./BasicCard.jsx";
 import Info from "./Info.jsx";
 import { Container } from "@mui/material";
 import { useQuery } from "react-query";
-import { retrieveProducts } from "../services/productService.js";
+import {
+  retrievePossibleAllergens,
+  retrieveProducts,
+} from "../services/productService.js";
 
 function LandingPage() {
   const { data: products } = useQuery("products", retrieveProducts);
+  const { data: possibleAllergens } = useQuery(
+    "allergens",
+    retrievePossibleAllergens
+  );
+
   console.log(products);
   return (
     <Container
@@ -14,7 +22,7 @@ function LandingPage() {
     >
       <div className="cards">
         <Info />
-        <BasicCard title="Your top allergens" />
+        <BasicCard title="Your top allergens" contents={possibleAllergens} />
         <BasicCard title="Your products" contents={products} />
       </div>
     </Container>

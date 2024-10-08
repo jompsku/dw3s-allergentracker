@@ -1,10 +1,16 @@
 // test data
 
 const products = [
-  { id: 0, name: "Cerave", ingredients: ["Aqua", "Carbamide"] },
+  {
+    id: 0,
+    name: "Cerave",
+    isProblematic: false,
+    ingredients: ["Aqua", "Carbamide"],
+  },
   {
     id: 1,
     name: "Nivea",
+    isProblematic: true,
     ingredients: [
       "Aqua",
       "Shea butter",
@@ -17,22 +23,26 @@ const products = [
   },
   {
     id: 2,
+    isProblematic: false,
     name: "Aqualan L",
     ingredients: ["Aqua", "Isopropyl Palmitate", "Cetyl Alcohol"],
   },
   {
     id: 3,
     name: "Dermosil",
+    isProblematic: true,
     ingredients: [
       "Aqua",
       "Isopropyl Palmitate",
       "Isohexadecane",
       "Sorbitan Stearate",
       "Cinnamals",
+      "Benzyl Benzoate",
     ],
   },
   {
     id: 4,
+    isProblematic: false,
     name: "Cerave Foaming",
     ingredients: [
       "Glycerin",
