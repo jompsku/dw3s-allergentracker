@@ -10,7 +10,7 @@ import { CardHeader } from "@mui/material"
 export default function BasicCard({ title }) {
   return (
       <Card variant="outlined" sx={{ margin: "1rem", minWidth: "500px"}}>
-        <CardHeader sx={{ backgroundColor: "#e87038", maxHeight: "1rem", color:"white"}} title={title} />
+        <CardHeader sx={{ backgroundColor: "#FF7F50", maxHeight: "1rem", color:"white"}} title={title} />
         <CardContent>
           <Typography sx={{ color: "text.secondary", mb: 1.5 }}>adjective</Typography>
           <Typography variant="body2"

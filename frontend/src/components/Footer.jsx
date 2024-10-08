@@ -3,7 +3,6 @@ import { useState } from "react"
 import "./Footer.css"
 import { Link, Snackbar } from "@mui/material"
 
-
 function Footer() {
   const [open, setOpen] = useState(false)
   const handleClick = () => {
@@ -13,6 +12,9 @@ function Footer() {
 
   return (
     <div className="footer">
+      <p>@2024 Group AllergenTracker</p>
+      <p>Terms of service</p>
+      <p>Privacy policy</p>
       <Link onClick={handleClick} color="#ffffff" component="button">
         <p>allergentracker@email.com</p>
       </Link>
