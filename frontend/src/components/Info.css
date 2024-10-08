@@ -1,0 +1,12 @@
+.infoTitle {
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0em;
+  color:#FF7F50;
+}
+
+.infoText {
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-size: large;
+  color:#000000;
+}

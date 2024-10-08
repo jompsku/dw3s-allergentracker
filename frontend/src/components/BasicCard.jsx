@@ -1,28 +1,33 @@
-import * as React from "react"
-import Box from "@mui/material/Box"
-import Card from "@mui/material/Card"
-import CardActions from "@mui/material/CardActions"
-import CardContent from "@mui/material/CardContent"
-import Button from "@mui/material/Button"
-import Typography from "@mui/material/Typography"
-import { CardHeader } from "@mui/material"
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import { CardHeader } from "@mui/material";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
 
-export default function BasicCard({ title }) {
+export default function BasicCard({ title, contents }) {
+  console.log(contents);
   return (
-      <Card variant="outlined" sx={{ margin: "1rem", minWidth: "500px"}}>
-        <CardHeader sx={{ backgroundColor: "#e87038", maxHeight: "1rem", color:"white"}} title={title} />
-        <CardContent>
-          <Typography sx={{ color: "text.secondary", mb: 1.5 }}>adjective</Typography>
-          <Typography variant="body2"
-          >
-            well meaning and kindly.
-            <br />
-            {'"a benevolent smile"'}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button size="small">Learn More</Button>
-        </CardActions>
-      </Card>
-  )
+    <Card variant="outlined" sx={{ minWidth: "500px" }}>
+      <CardHeader
+        sx={{ backgroundColor: "#FF7F50", maxHeight: "1rem", color: "white" }}
+        title={title}
+      />
+      <CardContent>
+        <List dense={true}>
+          {contents?.map((c) => (
+            <ListItem key={c.id}>
+              <ListItemText primary={c.name} />
+            </ListItem>
+          ))}
+        </List>
+      </CardContent>
+      <CardActions>
+        <Button size="small">View more</Button>
+      </CardActions>
+    </Card>
+  );
 }
