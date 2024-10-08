@@ -4,7 +4,7 @@ const products = [
   {
     id: 0,
     name: "Cerave",
-    isProblematic: false,
+    isProblematic: true,
     ingredients: ["Aqua", "Carbamide"],
   },
   {
