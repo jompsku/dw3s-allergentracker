@@ -2,12 +2,15 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
-import { CardHeader } from "@mui/material";
+import { CardHeader, ListItemIcon } from "@mui/material";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
+import CheckIcon from "@mui/icons-material/Check";
+import ErrorIcon from "@mui/icons-material/Error";
+import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 
-export default function BasicCard({ title, contents }) {
+export default function BasicCard({ title, contents, isProduct }) {
   console.log(contents);
   return (
     <Card variant="outlined" sx={{ minHeight: "100%" }}>
@@ -22,7 +25,15 @@ export default function BasicCard({ title, contents }) {
         <List dense={true}>
           {contents?.map((c) => (
             <ListItem key={c.id}>
+              {isProduct && (
+                <ListItemIcon>
+                  {c.isProblematic ? <ErrorIcon /> : <CheckIcon />}
+                </ListItemIcon>
+              )}
               <ListItemText primary={c.name} />
+              <ListItemIcon>
+                <KeyboardDoubleArrowRightIcon />
+              </ListItemIcon>
             </ListItem>
           ))}
         </List>
