@@ -1,7 +1,6 @@
-import "./LandingPage.css";
 import BasicCard from "./BasicCard.jsx";
 import Info from "./Info.jsx";
-import { Container } from "@mui/material";
+import { Box, Container, Grid2 } from "@mui/material";
 import { useQuery } from "react-query";
 import {
   retrievePossibleAllergens,
@@ -15,16 +14,17 @@ function LandingPage() {
     retrievePossibleAllergens
   );
 
-  console.log(products);
   return (
-    <Container
-      sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-    >
-      <div className="cards">
-        <Info />
-        <BasicCard title="Your top allergens" contents={possibleAllergens} />
-        <BasicCard title="Your products" contents={products} />
-      </div>
+    <Container>
+      <Info />
+      <Grid2 className="cards" container spacing={4}>
+        <Grid2 size={{ md: 6 }}>
+          <BasicCard title="Your top allergens" contents={possibleAllergens} />
+        </Grid2>
+        <Grid2 size={{ md: 6 }}>
+          <BasicCard title="Your products" contents={products} />
+        </Grid2>
+      </Grid2>
     </Container>
   );
 }

@@ -1,32 +1,24 @@
-import * as React from "react"
-import { useState } from "react"
-import "./Footer.css"
-import { Link, Snackbar } from "@mui/material"
+import { Container, Link, Box } from "@mui/material";
 
 function Footer() {
-  const [open, setOpen] = useState(false)
-  const handleClick = () => {
-    setOpen(true)
-    navigator.clipboard.writeText(window.location.toString())
-  }
-
   return (
-    <div className="footer">
-      <p>@2024 Group AllergenTracker</p>
-      <p>Terms of service</p>
-      <p>Privacy policy</p>
-      <Link onClick={handleClick} color="#ffffff" component="button">
-        <p>allergentracker@email.com</p>
-      </Link>
-      <Snackbar
-        message="Copied to clibboard"
-        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-        autoHideDuration={2000}
-        onClose={() => setOpen(false)}
-        open={open}
-      />
-    </div>
-  )
+    <Box component="footer" sx={{ p: 4 }}>
+      <Container maxWidth="lg">
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            gap: 8,
+            flexWrap: "wrap",
+          }}
+        >
+          <Link>About</Link>
+          <Link>Terms of service</Link>
+          <Link>Privacy policy</Link>
+        </Box>
+      </Container>
+    </Box>
+  );
 }
 
-export default Footer
+export default Footer;
