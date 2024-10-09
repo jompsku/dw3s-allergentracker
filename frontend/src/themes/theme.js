@@ -16,7 +16,7 @@ const theme = createTheme({
     h1: {
       fontFamily: '"Martel", serif',
       color: "white",
-      fontSize: "2rem",
+      fontSize: "2.5rem",
     },
     h2: {
       fontFamily: '"Martel", serif',

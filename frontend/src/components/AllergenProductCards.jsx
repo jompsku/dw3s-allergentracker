@@ -1,5 +1,5 @@
 import BasicCard from "./BasicCard.jsx";
-import { Grid2 } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 import { useQuery } from "react-query";
 import {
   retrievePossibleAllergens,
@@ -13,14 +13,14 @@ const AllergenProductCards = () => {
     retrievePossibleAllergens
   );
   return (
-    <Grid2 className="cards" container spacing={4}>
-      <Grid2 size={{ sm: 12, md: 6 }}>
+    <Grid className="cards" container spacing={4}>
+      <Grid size={6}>
         <BasicCard title="Your top allergens" contents={possibleAllergens} />
-      </Grid2>
-      <Grid2 size={{ sm: 12, md: 6 }}>
+      </Grid>
+      <Grid size={6}>
         <BasicCard title="Your products" contents={products} />
-      </Grid2>
-    </Grid2>
+      </Grid>
+    </Grid>
   );
 };
 
