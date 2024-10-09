@@ -1,4 +1,3 @@
-import "./LandingPage.css";
 import {
   Button,
   FormControl,
@@ -8,13 +7,28 @@ import {
   RadioGroup,
   TextField,
   Typography,
+  Box,
 } from "@mui/material";
 import { useState } from "react";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  boxShadow: 24,
+  border: "1px solid #FF7F50",
+  borderRadius: "4px",
+  p: 4,
+};
 
 const NewProductForm = () => {
   const [productName, setProductName] = useState("");
   const [productIngredients, setProductIngredients] = useState("");
   const [productCausesProblems, setProductCausesProblems] = useState("no");
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const newProduct = {
@@ -24,12 +38,14 @@ const NewProductForm = () => {
     };
     console.log(newProduct);
   };
+
   const handleScanIngredients = () => {
     const newIngredients = "Water, Ethanol";
     setProductIngredients(newIngredients);
   };
+
   return (
-    <div>
+    <Box sx={style} component="form">
       <Typography variant="h4" gutterBottom style={{ color: "#FF7F50" }}>
         Add product
       </Typography>
@@ -74,7 +90,7 @@ const NewProductForm = () => {
       <Button type="submit" variant="contained" onClick={handleSubmit}>
         Add Product
       </Button>
-    </div>
+    </Box>
   );
 };
 

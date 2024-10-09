@@ -1,55 +1,40 @@
-import * as React from "react"
-import AppBar from "@mui/material/AppBar"
-import Box from "@mui/material/Box"
-import Toolbar from "@mui/material/Toolbar"
-import IconButton from "@mui/material/IconButton"
-import Typography from "@mui/material/Typography"
-import Menu from "@mui/material/Menu"
-import Container from "@mui/material/Container"
-import Avatar from "@mui/material/Avatar"
-import Button from "@mui/material/Button"
-import Tooltip from "@mui/material/Tooltip"
-import MenuItem from "@mui/material/MenuItem"
-import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import Container from "@mui/material/Container";
+import Button from "@mui/material/Button";
+import Tooltip from "@mui/material/Tooltip";
+import MenuItem from "@mui/material/MenuItem";
+import AccountCircleSharpIcon from "@mui/icons-material/AccountCircleSharp";
+import { useState } from "react";
 
-const pages = ["User preferences", `How it works`]
-const settings = ["Profile", "Logout"]
+const pages = ["User preferences", `How it works`];
+const settings = ["Profile", "Logout"];
 
 function Header() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null)
-  const [anchorElUser, setAnchorElUser] = React.useState(null)
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
 
   const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget)
-  }
+    setAnchorElUser(event.currentTarget);
+  };
 
   const handleCloseNavMenu = () => {
-    setAnchorElNav(null)
-  }
+    setAnchorElNav(null);
+  };
 
   const handleCloseUserMenu = () => {
-    setAnchorElUser(null)
-  }
+    setAnchorElUser(null);
+  };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#FF7F50", position: "sticky", top: "0" }}>
+    <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
+          <Typography variant="h1" noWrap>
             Allergen Tracker
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -90,7 +75,7 @@ function Header() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <AccountCircleSharpIcon fontSize="large"/>
+                <AccountCircleSharpIcon fontSize="large" />
               </IconButton>
             </Tooltip>
             <Menu
@@ -111,7 +96,9 @@ function Header() {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography sx={{ textAlign: "center" }}>{setting}</Typography>
+                  <Typography sx={{ textAlign: "center" }}>
+                    {setting}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -119,6 +106,6 @@ function Header() {
         </Toolbar>
       </Container>
     </AppBar>
-  )
+  );
 }
-export default Header
+export default Header;

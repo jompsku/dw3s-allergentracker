@@ -13,9 +13,12 @@ import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArro
 export default function BasicCard({ title, contents, isProduct }) {
   console.log(contents);
   return (
-    <Card variant="outlined" sx={{ minWidth: "500px" }}>
+    <Card variant="outlined" sx={{ minHeight: "100%" }}>
       <CardHeader
-        sx={{ backgroundColor: "#FF7F50", maxHeight: "1rem", color: "white" }}
+        sx={{
+          backgroundColor: "primary.main",
+          color: "white",
+        }}
         title={title}
       />
       <CardContent>
