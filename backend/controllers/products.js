@@ -1,11 +1,10 @@
 const productsRouter = require("express").Router();
-const productList = require("../data/products");
 const { getPossibleAllergens } = require("../services/allergenService");
+const Product = require("../database/models/Product");
 
 productsRouter.post("/products", async (request, response) => {
   const { productIDs } = request.body;
 
-  // TODO
   if (!productIDs) {
     return response.status(400).json({ message: "no product IDs given" });
   }
@@ -18,8 +17,11 @@ productsRouter.post("/products", async (request, response) => {
 });
 
 productsRouter.get("/products", async (request, response) => {
-  response.status(200).json(productList);
+  const products = await Product.find({})
+  response.status(200).json(products);
 });
+
+
 
 productsRouter.get("/allergens", async (request, response) => {
   const possibleAllergens = getPossibleAllergens();
