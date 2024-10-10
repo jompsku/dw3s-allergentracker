@@ -18,7 +18,7 @@ const AllergenProductCards = () => {
         <BasicCard title="Your top allergens" contents={possibleAllergens} />
       </Grid>
       <Grid size={6}>
-        <BasicCard title="Your products" contents={products} />
+        <BasicCard title="Your products" contents={products} isProduct={true} />
       </Grid>
     </Grid>
   );

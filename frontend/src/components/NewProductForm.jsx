@@ -8,8 +8,8 @@ import {
   TextField,
   Typography,
   Box,
-} from "@mui/material";
-import { useState } from "react";
+} from "@mui/material"
+import { useState, forwardRef } from "react"
 
 const style = {
   position: "absolute",
@@ -22,30 +22,30 @@ const style = {
   border: "1px solid #FF7F50",
   borderRadius: "4px",
   p: 4,
-};
+}
 
-const NewProductForm = () => {
-  const [productName, setProductName] = useState("");
-  const [productIngredients, setProductIngredients] = useState("");
-  const [productCausesProblems, setProductCausesProblems] = useState("no");
+const NewProductForm = forwardRef((_, ref) => {
+  const [productName, setProductName] = useState("")
+  const [productIngredients, setProductIngredients] = useState("")
+  const [productCausesProblems, setProductCausesProblems] = useState("no")
 
   const handleSubmit = (event) => {
-    event.preventDefault();
+    event.preventDefault()
     const newProduct = {
       productName,
       productIngredients,
       productCausesProblems,
-    };
-    console.log(newProduct);
-  };
+    }
+    console.log(newProduct)
+  }
 
   const handleScanIngredients = () => {
-    const newIngredients = "Water, Ethanol";
-    setProductIngredients(newIngredients);
-  };
+    const newIngredients = "Water, Ethanol"
+    setProductIngredients(newIngredients)
+  }
 
   return (
-    <Box sx={style} component="form">
+    <Box sx={style} component="form" ref={ref} tabIndex={-1}>
       <Typography variant="h4" gutterBottom style={{ color: "#FF7F50" }}>
         Add product
       </Typography>
@@ -67,11 +67,7 @@ const NewProductForm = () => {
         onChange={(e) => setProductIngredients(e.target.value)}
         required
       />
-      <Button
-        variant="outlined"
-        onClick={handleScanIngredients}
-        style={{ marginTop: "10px" }}
-      >
+      <Button variant="outlined" onClick={handleScanIngredients} style={{ marginTop: "10px" }}>
         Or scan a label
       </Button>
       <div>
@@ -91,7 +87,7 @@ const NewProductForm = () => {
         Add Product
       </Button>
     </Box>
-  );
-};
+  )
+})
 
-export default NewProductForm;
+export default NewProductForm

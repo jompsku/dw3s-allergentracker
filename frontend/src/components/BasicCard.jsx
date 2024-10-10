@@ -11,7 +11,6 @@ import ErrorIcon from "@mui/icons-material/Error";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 
 export default function BasicCard({ title, contents, isProduct }) {
-  console.log(contents);
   return (
     <Card variant="outlined" sx={{ minHeight: "100%" }}>
       <CardHeader
