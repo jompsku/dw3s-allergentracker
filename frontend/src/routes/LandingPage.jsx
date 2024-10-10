@@ -1,7 +1,7 @@
-import AllergenProductCards from "./AllergenProductCards.jsx";
-import Info from "./Info.jsx";
+import AllergenProductCards from "../components/AllergenProductCards.jsx";
+import Info from "../components/Info.jsx";
 import { Box, Button, Container, Modal } from "@mui/material";
-import NewProductForm from "./NewProductForm.jsx";
+import NewProductForm from "../components/NewProductForm.jsx";
 import { useState } from "react";
 
 function LandingPage() {

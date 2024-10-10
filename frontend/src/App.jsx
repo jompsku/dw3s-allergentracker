@@ -1,19 +1,27 @@
-import { Box, CssBaseline } from "@mui/material";
-import Header from "./components/Header";
-import LandingPage from "./components/LandingPage";
-import Footer from "./components/Footer";
+import { CssBaseline } from "@mui/material";
+import LandingPage from "./routes/LandingPage";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./themes/theme";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import LoginPage from "./routes/LoginPage";
+import BasicLayout from "./layouts/BasicLayout";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <BasicLayout />,
+    children: [
+      { path: "/", element: <LandingPage /> },
+      { path: "/login", element: <LoginPage /> },
+    ],
+  },
+]);
 
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline>
-        <Box sx={{ height: "100vh" }}>
-          <Header />
-          <LandingPage />
-          <Footer />
-        </Box>
+        <RouterProvider router={router} />
       </CssBaseline>
     </ThemeProvider>
   );
