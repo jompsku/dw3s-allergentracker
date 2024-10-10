@@ -14,7 +14,8 @@ const LoginPage = () => {
   useEffect(() => {
     if (token) {
       const user = jwtDecode(token);
-      setProfile({ name: user.name, email: user.email });
+      setProfile(user);
+      axios.post("http://localhost:8080/login/verify", { token });
     }
   }, [token]);
   return (
