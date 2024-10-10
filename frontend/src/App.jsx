@@ -6,6 +6,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoginPage from "./routes/LoginPage";
 import BasicLayout from "./layouts/BasicLayout";
+import { AuthProvider } from "./context/AuthContext";
 
 const router = createBrowserRouter([
   {
@@ -20,13 +21,15 @@ const router = createBrowserRouter([
 
 const App = () => {
   return (
-    <GoogleOAuthProvider clientId="408468159516-9pf3e64af4knq24jm532g234ac3gqk3j.apps.googleusercontent.com">
-      <ThemeProvider theme={theme}>
-        <CssBaseline>
-          <RouterProvider router={router} />
-        </CssBaseline>
-      </ThemeProvider>
-    </GoogleOAuthProvider>
+    <AuthProvider>
+      <GoogleOAuthProvider clientId="408468159516-9pf3e64af4knq24jm532g234ac3gqk3j.apps.googleusercontent.com">
+        <ThemeProvider theme={theme}>
+          <CssBaseline>
+            <RouterProvider router={router} />
+          </CssBaseline>
+        </ThemeProvider>
+      </GoogleOAuthProvider>
+    </AuthProvider>
   );
 };
 

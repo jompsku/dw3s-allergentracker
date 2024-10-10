@@ -1,27 +1,32 @@
 import { Box } from "@mui/material";
 import { GoogleLogin } from "@react-oauth/google";
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { jwtDecode } from "jwt-decode";
+import { useAuth } from "../hooks/useAuth";
 
 const LoginPage = () => {
-  const onSuccess = (response) => setToken(response.credential);
+  const { login, user } = useAuth();
+
+  const onSuccess = async (response) => {
+    const credential = response.credential;
+    const authenticationResponse = await axios.post(
+      "http://localhost:8080/api/auth/google",
+      {
+        credential,
+      }
+    );
+    const { name, email, userid } = authenticationResponse.data;
+    login({ userid, email, name });
+  };
+
   const onError = (error) => console.log(error);
 
-  const [token, setToken] = useState("");
-  const [profile, setProfile] = useState({});
-
-  useEffect(() => {
-    if (token) {
-      const user = jwtDecode(token);
-      setProfile(user);
-      axios.post("http://localhost:8080/login/verify", { token });
-    }
-  }, [token]);
   return (
     <Box>
-      <GoogleLogin onSuccess={onSuccess} onError={onError} />
-      {JSON.stringify(profile)}
+      {!user ? (
+        <GoogleLogin onSuccess={onSuccess} onError={onError} />
+      ) : (
+        <>Hello {user.name}</>
+      )}
     </Box>
   );
 };

@@ -4,6 +4,7 @@ const session = require("express-session");
 const passport = require("passport");
 const dotenv = require("dotenv");
 const productsRouter = require("./controllers/products");
+const authenticationRouter = require("./controllers/authentication");
 
 require("./utils/passport");
 
@@ -24,20 +25,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(productsRouter);
-
-const { OAuth2Client } = require("google-auth-library");
-const client = new OAuth2Client();
-app.post("/login/verify", async (req, res) => {
-  const { token } = req.body;
-  const ticket = await client.verifyIdToken({
-    idToken: token,
-    audience:
-      "408468159516-9pf3e64af4knq24jm532g234ac3gqk3j.apps.googleusercontent.com",
-  });
-  const payload = ticket.getPayload();
-  const userid = payload["sub"];
-  res.send(userid);
-});
+app.use(authenticationRouter);
 
 app.get("/", (req, res) => {
   res.send("Backend is running!");
