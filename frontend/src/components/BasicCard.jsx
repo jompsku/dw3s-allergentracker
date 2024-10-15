@@ -22,8 +22,8 @@ export default function BasicCard({ title, contents, isProduct }) {
       />
       <CardContent>
         <List dense={true}>
-          {contents?.map((c) => (
-            <ListItem key={c.id}>
+          {contents?.map((c, index) => (
+            <ListItem key={index}>
               {isProduct && (
                 <ListItemIcon>
                   {c.isProblematic ? <ErrorIcon /> : <CheckIcon />}
