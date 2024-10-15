@@ -1,17 +1,11 @@
-import BasicCard from "./BasicCard.jsx";
-import Grid from "@mui/material/Grid2";
-import { useQuery } from "react-query";
-import {
-  retrievePossibleAllergens,
-  retrieveProducts,
-} from "../services/productService.js";
+import BasicCard from "./BasicCard.jsx"
+import Grid from "@mui/material/Grid2"
+import { useQuery } from "react-query"
+import { retrievePossibleAllergens, retrieveProducts } from "../services/productService.js"
 
 const AllergenProductCards = () => {
-  const { data: products } = useQuery("products", retrieveProducts);
-  const { data: possibleAllergens } = useQuery(
-    "allergens",
-    retrievePossibleAllergens
-  );
+  const { data: products } = useQuery("products", retrieveProducts)
+  const { data: possibleAllergens } = useQuery("allergens", retrievePossibleAllergens)
   return (
     <Grid className="cards" container spacing={4}>
       <Grid size={6}>
@@ -21,7 +15,7 @@ const AllergenProductCards = () => {
         <BasicCard title="Your products" contents={products} isProduct={true} />
       </Grid>
     </Grid>
-  );
-};
+  )
+}
 
-export default AllergenProductCards;
+export default AllergenProductCards

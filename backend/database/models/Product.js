@@ -3,7 +3,7 @@ const mongoose = require("../mongo")
 const productSchema = new mongoose.Schema({
   product_name: String,
   user_id: mongoose.Types.ObjectId,
-  ingredient_list: [String],
+  ingredients: [String],
   flagged_ingredients: [mongoose.Types.ObjectId],
 })
 

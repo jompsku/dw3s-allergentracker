@@ -50,7 +50,6 @@ const products = [
       "propanediol",
       "tetrasodium EDTA",
       "sodium hyaluronate",
-      "",
     ],
   },
 ];
