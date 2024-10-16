@@ -1,23 +1,27 @@
 const productsRouter = require("express").Router()
+const { default: mongoose } = require("mongoose")
 const { getPossibleAllergens } = require("../services/allergenService")
-const Product = require("../database/models/Product")
+const { retrieveProducts, addProduct } = require("../services/productService")
 
 productsRouter.post("/products", async (request, response) => {
-  const { productIDs } = request.body
+  try {
+    const {
+      productName: name,
+      productIngredients: ingredients,
+      productCausesProblems: isProblematic,
+    } = request.body
+    const user_id = new mongoose.Types.ObjectId() // request.user TODO
+    const product = await addProduct({ name, user_id, isProblematic, ingredients, flagged_ingredients: [] })
+    response.status(200).json(product)
+  } catch (err) {
+    console.log(err)
 
-  if (!productIDs) {
-    return response.status(400).json({ message: "no product IDs given" })
+    response.status(500).json({ message: "error while adding a new product" })
   }
-  if (!Array.isArray(productIDs)) {
-    return response.status(400).json({ message: "product IDs was not a list" })
-  }
-  const prods = productIDs.map((p) => productList.find((i) => i.id === p))
-
-  response.status(200).json({ products: prods })
 })
 
 productsRouter.get("/products", async (request, response) => {
-  const products = await Product.find({})
+  const products = await retrieveProducts()
   response.status(200).json(products)
 })
 
@@ -31,7 +35,7 @@ productsRouter.get("/allergens", async (request, response) => {
     }))
     response.status(200).json(res)
   } catch {
-    response.status(500).json({message: "error while finding allergens"})
+    response.status(500).json({ message: "error while finding allergens" })
   }
 })
 

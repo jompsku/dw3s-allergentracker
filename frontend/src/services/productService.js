@@ -5,12 +5,12 @@ export const retrieveProducts = async () => {
   return response.data
 }
 
-export const retrievePossibleAllergens = async () => {
-  const response = await axios.get("http://localhost:8080/allergens")
+export const addProduct = async (newProduct) => {
+  const response = await axios.post("http://localhost:8080/products", newProduct)
   return response.data
 }
 
-export const addProduct = async (product) => {
-  const response = await axios.post("http://localhost:8080/products", product)
+export const retrievePossibleAllergens = async () => {
+  const response = await axios.get("http://localhost:8080/allergens")
   return response.data
 }

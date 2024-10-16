@@ -10,6 +10,7 @@ import {
   Box,
 } from "@mui/material"
 import { useState, forwardRef } from "react"
+import { addProduct } from "../services/productService"
 
 const style = {
   position: "absolute",
@@ -27,9 +28,9 @@ const style = {
 const NewProductForm = forwardRef((_, ref) => {
   const [productName, setProductName] = useState("")
   const [productIngredients, setProductIngredients] = useState("")
-  const [productCausesProblems, setProductCausesProblems] = useState("no")
+  const [productCausesProblems, setProductCausesProblems] = useState(false)
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
     const newProduct = {
       productName,
@@ -37,6 +38,7 @@ const NewProductForm = forwardRef((_, ref) => {
       productCausesProblems,
     }
     console.log(newProduct)
+    await addProduct(newProduct)
   }
 
   const handleScanIngredients = () => {
@@ -78,8 +80,8 @@ const NewProductForm = forwardRef((_, ref) => {
             value={productCausesProblems}
             onChange={(e) => setProductCausesProblems(e.target.value)}
           >
-            <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-            <FormControlLabel value="no" control={<Radio />} label="No" />
+            <FormControlLabel value={true} control={<Radio />} label="Yes" />
+            <FormControlLabel value={false} control={<Radio />} label="No" />
           </RadioGroup>
         </FormControl>
       </div>
