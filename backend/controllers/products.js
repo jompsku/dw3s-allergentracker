@@ -11,11 +11,16 @@ productsRouter.post("/products", async (request, response) => {
       productCausesProblems: isProblematic,
     } = request.body
     const user_id = new mongoose.Types.ObjectId() // request.user TODO
-    const product = await addProduct({ name, user_id, isProblematic, ingredients, flagged_ingredients: [] })
+    const product = await addProduct({
+      name,
+      user_id,
+      isProblematic,
+      ingredients,
+      flagged_ingredients: [],
+    })
     response.status(200).json(product)
   } catch (err) {
     console.log(err)
-
     response.status(500).json({ message: "error while adding a new product" })
   }
 })
@@ -34,7 +39,8 @@ productsRouter.get("/allergens", async (request, response) => {
       name: item,
     }))
     response.status(200).json(res)
-  } catch {
+  } catch (err) {
+    console.log(err)
     response.status(500).json({ message: "error while finding allergens" })
   }
 })

@@ -32,9 +32,9 @@ const NewProductForm = forwardRef((_, ref) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    const newProduct = {
+      const newProduct = {
       productName,
-      productIngredients,
+      productIngredients: productIngredients.split(",").map(i => i.trim().toLowerCase()),
       productCausesProblems,
     }
     console.log(newProduct)
@@ -42,7 +42,7 @@ const NewProductForm = forwardRef((_, ref) => {
   }
 
   const handleScanIngredients = () => {
-    const newIngredients = "Water, Ethanol"
+    const newIngredients = "Glycerol, ASA, panthenol, Polysorbate 20"
     setProductIngredients(newIngredients)
   }
 
