@@ -1,15 +1,17 @@
-import { createTheme } from "@mui/material";
-import "@fontsource/martel";
-import "@fontsource/open-sans";
+import { createTheme } from "@mui/material"
+import "@fontsource/martel"
+import "@fontsource/open-sans"
 
 const theme = createTheme({
   palette: {
     primary: {
       main: "#FF7F50",
       contrastText: "#fff",
+      light: "#e3e3e3",
     },
     background: {
       default: "#fcf5f2",
+      footer: "#a69381",
     },
   },
   typography: {
@@ -25,6 +27,6 @@ const theme = createTheme({
       fontSize: "2rem",
     },
   },
-});
+})
 
-export default theme;
+export default theme
