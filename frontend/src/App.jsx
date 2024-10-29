@@ -11,7 +11,7 @@ import theme from "./themes/theme"
 import UserPreferences from "./components/pages/UserPreferences"
 
 const App = () => {
-  const [loggedIn, setLoggedIn] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(true)
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
