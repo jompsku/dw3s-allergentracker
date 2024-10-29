@@ -2,6 +2,7 @@ const productsRouter = require("express").Router()
 const { default: mongoose } = require("mongoose")
 const { getPossibleAllergens } = require("../services/allergenService")
 const { retrieveProducts, addProduct } = require("../services/productService")
+const { response } = require("express")
 
 productsRouter.post("/products", async (request, response) => {
   try {
@@ -22,6 +23,15 @@ productsRouter.post("/products", async (request, response) => {
   } catch (err) {
     console.log(err)
     response.status(500).json({ message: "error while adding a new product" })
+  }
+})
+
+productsRouter.delete("/products", async (request, response) => {
+  try {
+    const prod = request.body.ObjectId
+    await Product.deleteOne({id: prod})
+  } catch (err) {
+    response.status(500).json(err)
   }
 })
 
