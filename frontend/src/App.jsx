@@ -1,14 +1,22 @@
-import { Box, Container, CssBaseline, Typography } from "@mui/material"
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
-import { ThemeProvider } from "@mui/material/styles"
-import { useState } from "react"
-import Footer from "./components/Footer"
-import GeneralnfoPage from "./components/pages/GeneralnfoPage"
-import Header from "./components/Header"
-import LandingPage from "./components/pages/LandingPage"
-import LoginPage from "./components/pages/LoginPage"
-import theme from "./themes/theme"
-import UserPreferences from "./components/pages/UserPreferences"
+import {
+  Box,
+  Container,
+  CssBaseline,
+  Typography,
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  ThemeProvider,
+  useState,
+  Footer,
+  GeneralInfoPage,
+  Header,
+  LandingPage,
+  LoginPage,
+  theme,
+  UserPreferences,
+} from "./components/index"
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(true)
@@ -23,7 +31,7 @@ const App = () => {
             >
               <Routes>
                 <>
-                  <Route path="/how-it-works" element={<GeneralnfoPage />} />
+                  <Route path="/how-it-works" element={<GeneralInfoPage />} />
                   <Route path="/about" element={<p>about</p>} />
                   <Route path="/terms-of-service" element={<p>terms</p>} />
                   <Route path="/privacy-policy" element={<p>privacy</p>} />
