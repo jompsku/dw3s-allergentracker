@@ -7,11 +7,11 @@ const AllergenProductCards = () => {
   const { data: products } = useQuery("products", retrieveProducts)
   const { data: possibleAllergens } = useQuery("allergens", retrievePossibleAllergens)
   return (
-    <Grid className="cards" container spacing={4}>
-      <Grid size={6}>
+    <Grid className="cards" container spacing={4} sx={{flexWrap: "wrap"}}>
+      <Grid size={{xs: 12, md: 6}}>
         <BasicCard title="Your top allergens" contents={possibleAllergens} />
       </Grid>
-      <Grid size={6}>
+      <Grid size={{xs: 12, md: 6}}>
         <BasicCard title="Your products" contents={products} isProduct={true} />
       </Grid>
     </Grid>
