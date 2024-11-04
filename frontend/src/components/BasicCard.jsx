@@ -48,7 +48,7 @@ export default function BasicCard({ title, contents, isProduct }) {
                 {open === c._id ? <ExpandLess /> : <ExpandMore />}
               </ListItemButton>
               <Collapse in={open === c._id} timeout="auto" unmountOnExit>
-                {isProduct ? <ProductDetails product={c} /> : <IngredientDetails />}
+                {isProduct ? <ProductDetails product={c} /> : <IngredientDetails ingredient={c} />}
               </Collapse>
             </Fragment>
           )): <p style={{fontSize:"0.9rem"}}>You have no identified allergens</p>}
