@@ -1,19 +1,23 @@
-import Card from "@mui/material/Card"
-import CardActions from "@mui/material/CardActions"
-import CardContent from "@mui/material/CardContent"
-import Button from "@mui/material/Button"
-import { CardHeader, ListItemIcon } from "@mui/material"
-import List from "@mui/material/List"
-import ListItemText from "@mui/material/ListItemText"
-import CheckIcon from "@mui/icons-material/Check"
-import ErrorIcon from "@mui/icons-material/Error"
-import ExpandLess from "@mui/icons-material/ExpandLess"
-import ExpandMore from "@mui/icons-material/ExpandMore"
-import { Fragment, useState } from "react"
-import { ListItemButton } from "@mui/material"
-import Collapse from "@mui/material/Collapse"
-import ProductDetails from "./ProductDetails"
-
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardHeader,
+  CheckIcon,
+  Collapse,
+  ErrorIcon,
+  ExpandLess,
+  ExpandMore,
+  Fragment,
+  IngredientDetails,
+  List,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  ProductDetails,
+  useState,
+} from "./index.js"
 
 export default function BasicCard({ title, contents, isProduct }) {
   const [open, setOpen] = useState(null)
@@ -34,7 +38,7 @@ export default function BasicCard({ title, contents, isProduct }) {
       />
       <CardContent>
         <List dense={true}>
-          {contents?.map((c, index) => (
+          {contents?.length > 0 ? contents?.map((c, index) => (
             <Fragment key={index}>
               <ListItemButton onClick={() => handleClick(index)}>
                 {isProduct && (
@@ -44,10 +48,10 @@ export default function BasicCard({ title, contents, isProduct }) {
                 {open === index ? <ExpandLess /> : <ExpandMore />}
               </ListItemButton>
               <Collapse in={open === index} timeout="auto" unmountOnExit>
-                <ProductDetails/>
+                {isProduct ? <ProductDetails product={c} /> : <IngredientDetails />}
               </Collapse>
             </Fragment>
-          ))}
+          )): <p style={{fontSize:"0.9rem"}}>You have no identified allergens</p>}
         </List>
       </CardContent>
       <CardActions>
