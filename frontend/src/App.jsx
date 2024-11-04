@@ -24,7 +24,7 @@ const App = () => {
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <CssBaseline>
-          <Box sx={{ height: "100vh", display: "flex", flexDirection: "column" }}>
+          <Box sx={{ height: "100vh", display: "flex", flexDirection: "column", minWidth: "530px"}}>
             <Header loggedIn={loggedIn} />
             <Container
               sx={{ display: "flex", flexDirection: "column", alignItems: "center", flex: 1 }}

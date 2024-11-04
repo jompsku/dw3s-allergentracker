@@ -18,7 +18,7 @@ function LandingPage() {
       <Modal open={open} onClose={handleClose}>
         <NewProductForm />
       </Modal>
-      <AllergenProductCards />
+      <AllergenProductCards/>
     </Container>
   )
 }
