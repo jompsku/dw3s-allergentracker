@@ -40,14 +40,14 @@ export default function BasicCard({ title, contents, isProduct }) {
         <List dense={true}>
           {contents?.length > 0 ? contents?.map((c, index) => (
             <Fragment key={index}>
-              <ListItemButton onClick={() => handleClick(index)}>
+              <ListItemButton onClick={() => handleClick(c._id)}>
                 {isProduct && (
                   <ListItemIcon>{c.isProblematic ? <ErrorIcon /> : <CheckIcon />}</ListItemIcon>
                 )}
                 <ListItemText primary={c.name} />
-                {open === index ? <ExpandLess /> : <ExpandMore />}
+                {open === c._id ? <ExpandLess /> : <ExpandMore />}
               </ListItemButton>
-              <Collapse in={open === index} timeout="auto" unmountOnExit>
+              <Collapse in={open === c._id} timeout="auto" unmountOnExit>
                 {isProduct ? <ProductDetails product={c} /> : <IngredientDetails />}
               </Collapse>
             </Fragment>

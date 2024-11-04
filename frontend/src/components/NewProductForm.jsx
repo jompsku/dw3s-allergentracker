@@ -11,6 +11,7 @@ import {
 } from "@mui/material"
 import { useState, forwardRef } from "react"
 import { addProduct } from "../services/productService"
+import { useMutation, useQueryClient } from "react-query"
 
 const style = {
   position: "absolute",
@@ -25,20 +26,27 @@ const style = {
   p: 4,
 }
 
-const NewProductForm = forwardRef((_, ref) => {
+const NewProductForm = forwardRef(({ handleClose }, ref) => {
   const [productName, setProductName] = useState("")
   const [productIngredients, setProductIngredients] = useState("")
   const [productCausesProblems, setProductCausesProblems] = useState(false)
-
-  const handleSubmit = async (event) => {
-    event.preventDefault()
-      const newProduct = {
+  const queryClient = useQueryClient()
+  
+  const addMutation = useMutation({
+    mutationFn: addProduct,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["products"] })
+    },
+  })
+  
+  const handleAdd = async () => {
+    const newProduct = {
       productName,
-      productIngredients: productIngredients.split(",").map(i => i.trim().toLowerCase()),
+      productIngredients: productIngredients.split(",").map((i) => i.trim().toLowerCase()),
       productCausesProblems,
     }
-    console.log(newProduct)
-    await addProduct(newProduct)
+    await addMutation.mutate(newProduct)
+    handleClose()
   }
 
   const handleScanIngredients = () => {
@@ -85,7 +93,7 @@ const NewProductForm = forwardRef((_, ref) => {
           </RadioGroup>
         </FormControl>
       </div>
-      <Button type="submit" variant="contained" onClick={handleSubmit}>
+      <Button type="submit" variant="contained" onClick={() => handleAdd()}>
         Add Product
       </Button>
     </Box>

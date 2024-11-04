@@ -2,7 +2,7 @@ const productsRouter = require("express").Router()
 const { default: mongoose } = require("mongoose")
 const { getPossibleAllergens } = require("../services/allergenService")
 const { retrieveProducts, addProduct } = require("../services/productService")
-const { response } = require("express")
+const Product = require("../database/models/Product")
 
 productsRouter.post("/products", async (request, response) => {
   try {
@@ -26,11 +26,13 @@ productsRouter.post("/products", async (request, response) => {
   }
 })
 
-productsRouter.delete("/products", async (request, response) => {
+productsRouter.delete("/products/:id", async (request, response) => {
   try {
-    const prod = request.body.ObjectId
-    await Product.deleteOne({id: prod})
+    const prod = request.params.id
+    await Product.deleteOne({_id: prod})
+    response.status(200).send()
   } catch (err) {
+    console.log(err);
     response.status(500).json(err)
   }
 })
@@ -45,7 +47,7 @@ productsRouter.get("/allergens", async (request, response) => {
     const possibleAllergens = await getPossibleAllergens()
     // For the demo, in real application ingredients will have their own ids also
     const res = possibleAllergens.map((item, index) => ({
-      id: index,
+      _id: index,
       name: item,
     }))
     response.status(200).json(res)
