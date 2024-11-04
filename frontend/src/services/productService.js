@@ -10,6 +10,11 @@ export const addProduct = async (newProduct) => {
   return response.data
 }
 
+export const deleteProduct = async (product) => {
+  const response = await axios.delete(`http://localhost:8080/products/${product._id}`)
+  return response.data
+}
+
 export const retrievePossibleAllergens = async () => {
   const response = await axios.get("http://localhost:8080/allergens")
   return response.data
