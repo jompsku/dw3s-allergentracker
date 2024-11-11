@@ -22,4 +22,9 @@ const addProduct = async ({ name, user_id, isProblematic, ingredients, flagged_i
   return newProduct
 }
 
-module.exports = { retrieveProducts, retrieveIngredients, addProduct }
+const editProduct = async (productID, updatedProduct) => {
+  const editedProduct = await Product.findOneAndUpdate({ _id: productID }, updatedProduct)
+  return editedProduct
+}
+
+module.exports = { retrieveProducts, retrieveIngredients, addProduct, editProduct }
