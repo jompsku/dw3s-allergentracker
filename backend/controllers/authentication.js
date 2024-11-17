@@ -59,8 +59,8 @@ authenticationRouter.get(
 );
 
 authenticationRouter.get("/auth/current_user", (req, res) => {
-  console.log("arr");
   if (req.isAuthenticated()) {
+    console.log(req);
     return res.status(200).json({
       id: req.user.id,
       name: req.user.name,
@@ -72,8 +72,23 @@ authenticationRouter.get("/auth/current_user", (req, res) => {
 });
 
 authenticationRouter.get("/logout", (req, res) => {
-  req.logout();
-  res.redirect("/");
+  req.logout((err) => {
+    if (err) {
+      return res.status(500).json({ message: "Logout failed", error: err });
+    }
+    req.session.destroy((err) => {
+      if (err) {
+        return res
+          .status(500)
+          .json({ message: "Session destruction failed", error: err });
+      }
+
+      // Clear the session cookie by setting it to an expired value
+      res.clearCookie("connect.sid");
+
+      return res.redirect("/");
+    });
+  });
 });
 
 module.exports = authenticationRouter;

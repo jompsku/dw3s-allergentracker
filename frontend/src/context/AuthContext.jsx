@@ -8,21 +8,13 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/api/current_user", { withCredentials: true })
-      .then((response) => setUser(response.data))
-      .catch(() => setUser(null))
-      .finally(() => setLoading(false)); // Ensure loading is false after fetching
-  }, []);
-
-  useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
       setUser(JSON.parse(storedUser));
       setLoading(false);
     } else {
       axios
-        .get("http://localhost:3000/api/current_user", {
+        .get("http://localhost:8080/auth/current_user", {
           withCredentials: true,
         })
         .then((response) => {
@@ -36,7 +28,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await axios.get("http://localhost:3000/logout", {
+      await axios.get("http://localhost:8080/logout", {
         withCredentials: true,
       });
       setUser(null);
@@ -45,7 +37,6 @@ export const AuthProvider = ({ children }) => {
       console.error("Error logging out:", error);
     }
   };
-
   return (
     <AuthContext.Provider value={{ user, loading, logout }}>
       {children}
