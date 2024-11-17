@@ -8,8 +8,10 @@ import {
   TextField,
   Typography,
   Box,
-} from "@mui/material";
-import { useState } from "react";
+} from "@mui/material"
+import { useState, forwardRef } from "react"
+import { addProduct } from "../services/productService"
+import { useMutation, useQueryClient } from "react-query"
 
 const style = {
   position: "absolute",
@@ -22,30 +24,38 @@ const style = {
   border: "1px solid #FF7F50",
   borderRadius: "4px",
   p: 4,
-};
+}
 
-const NewProductForm = () => {
-  const [productName, setProductName] = useState("");
-  const [productIngredients, setProductIngredients] = useState("");
-  const [productCausesProblems, setProductCausesProblems] = useState("no");
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
+const NewProductForm = forwardRef(({ handleClose }, ref) => {
+  const [productName, setProductName] = useState("")
+  const [productIngredients, setProductIngredients] = useState("")
+  const [productCausesProblems, setProductCausesProblems] = useState(false)
+  const queryClient = useQueryClient()
+  
+  const addMutation = useMutation({
+    mutationFn: addProduct,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["products"] })
+    },
+  })
+  
+  const handleAdd = async () => {
     const newProduct = {
       productName,
-      productIngredients,
+      productIngredients: productIngredients.split(",").map((i) => i.trim().toLowerCase()),
       productCausesProblems,
-    };
-    console.log(newProduct);
-  };
+    }
+    await addMutation.mutate(newProduct)
+    handleClose()
+  }
 
   const handleScanIngredients = () => {
-    const newIngredients = "Water, Ethanol";
-    setProductIngredients(newIngredients);
-  };
+    const newIngredients = "Glycerol, ASA, panthenol, Polysorbate 20"
+    setProductIngredients(newIngredients)
+  }
 
   return (
-    <Box sx={style} component="form">
+    <Box sx={style} component="form" ref={ref} tabIndex={-1}>
       <Typography variant="h4" gutterBottom style={{ color: "#FF7F50" }}>
         Add product
       </Typography>
@@ -67,11 +77,7 @@ const NewProductForm = () => {
         onChange={(e) => setProductIngredients(e.target.value)}
         required
       />
-      <Button
-        variant="outlined"
-        onClick={handleScanIngredients}
-        style={{ marginTop: "10px" }}
-      >
+      <Button variant="outlined" onClick={handleScanIngredients} style={{ marginTop: "10px" }}>
         Or scan a label
       </Button>
       <div>
@@ -82,16 +88,16 @@ const NewProductForm = () => {
             value={productCausesProblems}
             onChange={(e) => setProductCausesProblems(e.target.value)}
           >
-            <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-            <FormControlLabel value="no" control={<Radio />} label="No" />
+            <FormControlLabel value={true} control={<Radio />} label="Yes" />
+            <FormControlLabel value={false} control={<Radio />} label="No" />
           </RadioGroup>
         </FormControl>
       </div>
-      <Button type="submit" variant="contained" onClick={handleSubmit}>
+      <Button type="submit" variant="contained" onClick={() => handleAdd()}>
         Add Product
       </Button>
     </Box>
-  );
-};
+  )
+})
 
-export default NewProductForm;
+export default NewProductForm
