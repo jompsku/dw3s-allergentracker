@@ -59,13 +59,16 @@ function Header({}) {
                 </Button>
               ))}
           </Box>
-          {user ? (
+          {user && (
             <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <AccountCircleSharpIcon fontSize="large" />
-                </IconButton>
-              </Tooltip>
+              <Box onClick={handleOpenUserMenu}>
+                {user.name} {"(" + user.email + ")"}
+                <Tooltip title="Open settings">
+                  <IconButton sx={{ p: 0 }}>
+                    <AccountCircleSharpIcon fontSize="large" />
+                  </IconButton>
+                </Tooltip>
+              </Box>
               <Menu
                 sx={{ mt: "45px" }}
                 id="menu-appbar"
@@ -91,7 +94,7 @@ function Header({}) {
                 ))}
               </Menu>
             </Box>
-          ) : null}
+          )}
         </Toolbar>
       </Container>
     </AppBar>
