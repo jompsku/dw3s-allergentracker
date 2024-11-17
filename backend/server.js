@@ -8,24 +8,29 @@ const authenticationRouter = require("./controllers/authentication");
 
 require("./utils/passport");
 
-dotenv.config(); // Load environment variables
+dotenv.config();
 
 const app = express();
 
 app.use(cors());
-app.use(express.json()); // For parsing JSON bodies
+app.use(express.json());
 app.use(
   session({
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    secret: "change",
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24, // 1 day
+      secure: false,
+    },
   })
 );
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(productsRouter);
 app.use(authenticationRouter);
+
+app.use(productsRouter);
 
 app.get("/", (req, res) => {
   res.send("Backend is running!");

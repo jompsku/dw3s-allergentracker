@@ -1,20 +1,79 @@
-const { OAuth2Client } = require("google-auth-library");
-const client = new OAuth2Client();
-
+const passport = require("passport");
 const authenticationRouter = require("express").Router();
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
+const User = require("../database/models/User");
 
-authenticationRouter.post("/api/auth/google", async (req, res) => {
-  const { credential } = req.body;
-  const ticket = await client.verifyIdToken({
-    idToken: credential,
-    audience:
-      "408468159516-9pf3e64af4knq24jm532g234ac3gqk3j.apps.googleusercontent.com",
-  });
-  const payload = ticket.getPayload();
-  const userid = payload["sub"];
-  const email = payload["email"];
-  const name = payload["name"];
-  res.send({ userid, email, name });
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: `http://localhost:8080/auth/google/callback`,
+    },
+
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        let user = await User.findOne({ googleId: profile.id });
+        if (!user) {
+          user = await User.create({
+            google_id: profile.id,
+            email: profile.emails[0].value,
+            name: profile.displayName,
+            is_admin: false,
+          });
+        }
+        done(null, user);
+      } catch (error) {
+        done(error, null);
+      }
+    }
+  )
+);
+
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await User.findById(id);
+    done(null, user);
+  } catch (error) {
+    done(error, null);
+  }
+});
+
+authenticationRouter.get(
+  "/auth/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
+
+authenticationRouter.get(
+  "/auth/google/callback",
+  passport.authenticate("google", {
+    failureRedirect: "http://localhost:5173/login",
+  }),
+  (req, res) => {
+    res.redirect("http://localhost:5173");
+  }
+);
+
+authenticationRouter.get("/auth/current_user", (req, res) => {
+  console.log("arr");
+  if (req.isAuthenticated()) {
+    return res.status(200).json({
+      id: req.user.id,
+      name: req.user.name,
+      email: req.user.email,
+    });
+  } else {
+    return res.status(401).json({ error: "Unauthorized, user not logged in" });
+  }
+});
+
+authenticationRouter.get("/logout", (req, res) => {
+  req.logout();
+  res.redirect("/");
 });
 
 module.exports = authenticationRouter;
