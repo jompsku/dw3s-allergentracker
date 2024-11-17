@@ -18,6 +18,7 @@ import {
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import { React, Fragment, useState } from "react"
 import { ThemeProvider } from "@mui/material/styles"
+import AboutPage from "./pages/AboutPage"
 import AccountCircleSharpIcon from "@mui/icons-material/AccountCircleSharp"
 import AppBar from "@mui/material/AppBar"
 import Button from "@mui/material/Button"
@@ -39,13 +40,16 @@ import ListItemText from "@mui/material/ListItemText"
 import LoginPage from "./pages/LoginPage"
 import Menu from "@mui/material/Menu"
 import MenuItem from "@mui/material/MenuItem"
+import PrivacyPolicyPage from "./pages/PrivacyPolicyPage"
 import ProductDetails from "./ProductDetails"
 import theme from "../themes/theme"
 import Toolbar from "@mui/material/Toolbar"
 import Tooltip from "@mui/material/Tooltip"
+import TosPage from "./pages/TosPage"
 import UserPreferences from "./pages/UserPreferences"
 
 export {
+  AboutPage,
   AccountCircleSharpIcon,
   AppBar,
   Box,
@@ -81,6 +85,7 @@ export {
   MenuItem,
   Modal,
   Navigate,
+  PrivacyPolicyPage,
   ProductDetails,
   Radio,
   RadioGroup,
@@ -92,6 +97,7 @@ export {
   ThemeProvider,
   Toolbar,
   Tooltip,
+  TosPage,
   Typography,
   UserPreferences,
   useState,
