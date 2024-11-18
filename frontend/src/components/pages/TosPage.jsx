@@ -3,7 +3,7 @@ import { Box, Typography } from "@mui/material";
 const TosPage = () => {
   return (
     <Box>
-      <Typography variant="h2">Terms of Service</Typography>
+      <Typography variant="h2" sx={{ marginTop: '25px' }}>Terms of Service</Typography>
       <p><strong>Effective Date:</strong> 18.11.2024</p>
       <p>
         Welcome to Allergen Tracker (<q>we</q>, <q>us</q>, <q>our</q>). By accessing or using our allergen tracker application
@@ -28,14 +28,6 @@ const TosPage = () => {
         <li>You agree to use the Application only for its intended purpose and in compliance with applicable laws.</li>
         <li>You must not attempt to disrupt the functionality of the Application.</li>
       </ul>
-
-      <Typography variant="h3">3.1 Right to Use</Typography>
-      <p>
-        Subject to your compliance with these Terms, we grant you a limited, non-exclusive, non-transferable license to 
-        use the Application for personal, non-commercial purposes. This license is revocable at our discretion, and you 
-        may only use the Application in accordance with these Terms and for its intended purpose. You are prohibited from 
-        using the Application for any commercial purpose or in any manner that violates applicable laws or regulations.
-      </p>
 
       <Typography variant="h3">4. User Content</Typography>
       <p>
@@ -77,7 +69,17 @@ const TosPage = () => {
         To the fullest extent permitted by law, we shall not be liable for any indirect, incidental, special, or consequential damages arising out of the use of the Application.
       </p>
 
-      <Typography variant="h3">10. Contact Us</Typography>
+      <Typography variant="h3">10. Fees and Payments</Typography>
+      <p>
+        The Application is currently offered free of charge. We do not collect any fees or payments for the use of the Application.
+      </p>
+      <p>
+        Should we decide to introduce any paid features or subscription plans in the future, we will provide users with prior notice 
+        and update these Terms accordingly. You will have the opportunity to review and accept any new terms before incurring 
+        any charges.
+      </p>
+
+      <Typography variant="h3">11. Contact Us</Typography>
       <p>
         If you have any questions or concerns about these Terms of Service, please contact us. The contact details are available on our <a href="/about" style={{ textDecoration: 'underline' }}>About</a> page.
       </p>
