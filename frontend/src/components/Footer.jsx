@@ -2,10 +2,11 @@ import { Container, Box, Link as MuiLink } from "@mui/material"
 import { Link } from "react-router-dom"
 
 function Footer() {
-  const links = [
-    { name: "About", link: "/about" },
-    { name: "Terms of service", link: "/terms-of-service" },
-    { name: "Privacy policy", link: "/privacy-policy" },
+
+  const pages = [
+    { name: "About", url: "/about", needsLogin: false },
+    { name: "Terms of Service", url: "/terms-of-service", needsLogin: false },
+    { name: "Privacy policy", url: "/privacy-policy", needsLogin: false },
   ]
 
   return (
@@ -19,9 +20,13 @@ function Footer() {
             flexWrap: "wrap",
           }}
         >
-          {links.map((l, index) => (
-            <MuiLink key={index} color="primary.light" component={Link} to={l.link} >
-              {l.name}
+          {pages.map((page) => (
+            <MuiLink
+              key={page.name}
+              color="primary.light"
+              component={Link}
+              to={page.url} >
+              {page.name}
             </MuiLink>
           ))}
         </Box>

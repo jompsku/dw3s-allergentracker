@@ -16,6 +16,9 @@ import {
   LoginPage,
   theme,
   UserPreferences,
+  PrivacyPolicyPage,
+  TosPage,
+  AboutPage
 } from "./components/index"
 
 const App = () => {
@@ -32,9 +35,9 @@ const App = () => {
               <Routes>
                 <>
                   <Route path="/how-it-works" element={<GeneralInfoPage />} />
-                  <Route path="/about" element={<p>about</p>} />
-                  <Route path="/terms-of-service" element={<p>terms</p>} />
-                  <Route path="/privacy-policy" element={<p>privacy</p>} />
+                  <Route path="/about" element={<AboutPage />} />
+                  <Route path="/terms-of-service" element={<TosPage />} />
+                  <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
                   {loggedIn ? (
                     <>
                       <Route path="/" element={<LandingPage />} />
