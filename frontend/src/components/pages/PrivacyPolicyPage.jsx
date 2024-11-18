@@ -3,7 +3,7 @@ import { Box, Typography } from "@mui/material";
 const PrivacyPolicyPage = () => {
   return (
     <Box>
-      <Typography variant="h2">Privacy Policy</Typography>
+      <Typography variant="h2" sx={{ marginTop: '25px' }}>Privacy Policy</Typography>
       <p>
         <strong>Effective Date:</strong> 18.11.2024
       </p>
@@ -15,7 +15,7 @@ const PrivacyPolicyPage = () => {
       </p>
 
       <Typography variant="h3">1. Information We Collect</Typography>
-      <Typography variant="h4">a. User-Provided Information</Typography>
+      <Typography variant="h4" sx={{ marginTop: '16px' }}>a. User-Provided Information</Typography>
       <p>When using the Application, you may voluntarily input:</p>
       <ul>
         <li>Cosmetic products you have used</li>
