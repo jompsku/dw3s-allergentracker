@@ -1,5 +1,4 @@
 import {
-  Button,
   Card,
   CardActions,
   CardContent,
@@ -21,6 +20,7 @@ import {
 
 export default function BasicCard({ title, contents, isProduct }) {
   const [open, setOpen] = useState(null)
+  const sortedContents = contents?.sort((a, b) => a.name.localeCompare(b.name))
 
   const handleClick = (index) => {
     if (open === index) setOpen(null)
@@ -28,7 +28,7 @@ export default function BasicCard({ title, contents, isProduct }) {
   }
 
   return (
-    <Card variant="outlined" sx={{ minHeight: "100%" }}>
+    <Card variant="outlined" sx={{ minHeight: "100%"}}>
       <CardHeader
         sx={{
           backgroundColor: "primary.main",
@@ -38,8 +38,8 @@ export default function BasicCard({ title, contents, isProduct }) {
       />
       <CardContent>
         <List dense={true}>
-          {contents?.length > 0 ? (
-            contents?.map((c, index) => (
+          {sortedContents?.length > 0 ? (
+            sortedContents?.map((c, index) => (
               <Fragment key={index}>
                 <ListItemButton onClick={() => handleClick(c._id)}>
                   {isProduct && (
@@ -62,9 +62,6 @@ export default function BasicCard({ title, contents, isProduct }) {
           )}
         </List>
       </CardContent>
-      <CardActions>
-        {contents?.length > 10 ? <Button size="small">View more</Button> : null}
-      </CardActions>
     </Card>
   )
 }

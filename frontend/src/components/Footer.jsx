@@ -9,7 +9,7 @@ function Footer() {
   ]
 
   return (
-    <Box component="footer" sx={{ p: 4, bgcolor: "background.footer" }}>
+    <Box component="footer" sx={{ p: 4, mt: 4,  bgcolor: "background.footer" }}>
       <Container maxWidth="lg">
         <Box
           sx={{
