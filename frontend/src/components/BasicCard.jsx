@@ -1,6 +1,5 @@
 import {
   Card,
-  CardActions,
   CardContent,
   CardHeader,
   CheckIcon,
@@ -28,7 +27,13 @@ export default function BasicCard({ title, contents, isProduct }) {
   }
 
   return (
-    <Card variant="outlined" sx={{ minHeight: "100%"}}>
+    <Card
+      variant="outlined"
+      sx={{
+        minHeight: "100%",
+        maxHeight: "600px",
+      }}
+    >
       <CardHeader
         sx={{
           backgroundColor: "primary.main",
@@ -36,8 +41,23 @@ export default function BasicCard({ title, contents, isProduct }) {
         }}
         title={title}
       />
-      <CardContent>
-        <List dense={true}>
+      <CardContent
+        sx={{
+          height: "500px",
+          overflow: "auto",
+          "&::-webkit-scrollbar": {
+            width: "0.5em",
+          },
+          "&::-webkit-scrollbar-track": {
+            boxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
+            webkitBoxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
+          },
+          "&::-webkit-scrollbar-thumb": {
+            backgroundColor: "rgba(0,0,0,.1)",
+          },
+        }}
+      >
+        <List sx={{width: "480px"}} dense={true}>
           {sortedContents?.length > 0 ? (
             sortedContents?.map((c, index) => (
               <Fragment key={index}>

@@ -90,7 +90,9 @@ const ProductDetails = ({ product }) => {
         <Box sx={{ margin: "1rem" }}>
           <Typography fontWeight={"bold"}>{product.name}</Typography>
           <h5>Ingredients:</h5>
-          <Typography>{product.ingredients?.map((i) => `${i}`).join(`, `)}</Typography>
+          <Typography style={{ fontSize: "13px" }}>
+            {product.ingredients?.map((i) => `${i}`).join(`, `)}
+          </Typography>
           {product.isProblematic ? (
             <p style={{ color: "red", fontWeight: "bold", fontSize: "0.9rem" }}>
               The product has been causing allergies

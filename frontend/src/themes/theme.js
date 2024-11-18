@@ -26,7 +26,7 @@ const theme = createTheme({
       color: "#FF7F50",
       fontSize: "2rem",
     },
-    h3: { 
+    h3: {
       fontFamily: '"Martel", serif',
       color: "#FF7F50",
       fontSize: "1.5rem",
@@ -35,6 +35,20 @@ const theme = createTheme({
       fontFamily: '"Martel", serif',
       color: "#FF7F50",
       fontSize: "1.2rem",
+    },
+  },
+  components: {
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          ".MuiInputBase-input": { fontSize: "13px" },
+        },
+      },
+    },
+    MuiTypography: {
+      styleOverrides: {
+        root: { ".MuiTypography": { fontSize: "13px" } },
+      },
     },
   },
 })

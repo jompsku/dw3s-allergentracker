@@ -18,7 +18,7 @@ import {
   UserPreferences,
   PrivacyPolicyPage,
   TosPage,
-  AboutPage
+  AboutPage,
 } from "./components/index"
 
 const App = () => {
@@ -27,10 +27,29 @@ const App = () => {
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <CssBaseline>
-          <Box sx={{ height: "100vh", display: "flex", flexDirection: "column", minWidth: "530px"}}>
+          <Box
+            sx={{ height: "100vh", display: "flex", flexDirection: "column", minWidth: "530px" }}
+          >
             <Header loggedIn={loggedIn} />
-            <Container
-              sx={{ display: "flex", flexDirection: "column", alignItems: "center", flex: 1 }}
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                paddingBottom: "24px",
+                flex: 1,
+                overflow: "auto",
+                "&::-webkit-scrollbar": {
+                  width: "0.5em",
+                },
+                "&::-webkit-scrollbar-track": {
+                  boxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
+                  webkitBoxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
+                },
+                "&::-webkit-scrollbar-thumb": {
+                  backgroundColor: "rgba(0,0,0,.1)",
+                },
+              }}
             >
               <Routes>
                 <>
@@ -60,7 +79,7 @@ const App = () => {
                   />
                 </>
               </Routes>
-            </Container>
+            </Box>
             <Footer />
           </Box>
         </CssBaseline>
