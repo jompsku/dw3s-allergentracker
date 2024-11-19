@@ -13,7 +13,7 @@ passport.use(
 
     async (accessToken, refreshToken, profile, done) => {
       try {
-        let user = await User.findOne({ googleId: profile.id });
+        let user = await User.findOne({ google_id: profile.id });
         if (!user) {
           user = await User.create({
             google_id: profile.id,
@@ -29,19 +29,6 @@ passport.use(
     }
   )
 );
-
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
-
-passport.deserializeUser(async (id, done) => {
-  try {
-    const user = await User.findById(id);
-    done(null, user);
-  } catch (error) {
-    done(error, null);
-  }
-});
 
 authenticationRouter.get(
   "/auth/google",
@@ -88,6 +75,25 @@ authenticationRouter.get("/logout", (req, res) => {
       return res.redirect("/");
     });
   });
+});
+
+passport.serializeUser((user, done) => {
+  done(null, user.google_id);
+});
+
+passport.deserializeUser(async (id, done) => {
+  console.log("Deserializing user with ID:", id); // Add logging to check the id
+  try {
+    const user = await User.findOne({ google_id: id });
+    if (!user) {
+      return done(new Error("User not found"), null);
+    }
+    console.log("Found user:", user); // Check if user was found
+    done(null, user); // Attach user to req.user
+  } catch (error) {
+    console.error("Error in deserializing user:", error);
+    done(error, null);
+  }
 });
 
 module.exports = authenticationRouter;

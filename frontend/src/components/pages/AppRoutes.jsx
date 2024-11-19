@@ -12,6 +12,8 @@ const AppRoutes = () => {
 
   return (
     <Routes>
+      <Route path="/" element={<PrivateRoute element={<LandingPage />} />} />
+
       <Route path="/how-it-works" element={<GeneralInfoPage />} />
       <Route path="/about" element={<p>about</p>} />
       <Route path="/terms-of-service" element={<p>terms</p>} />
@@ -20,11 +22,7 @@ const AppRoutes = () => {
         path="/login"
         element={user ? <Navigate to="/" replace /> : <LoginPage />}
       />
-      <Route path="/" element={<PrivateRoute element={<LandingPage />} />} />
-      <Route
-        path="/user-preferences"
-        element={<PrivateRoute element={<UserPreferences />} />}
-      />
+
       <Route
         path="*"
         element={

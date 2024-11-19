@@ -4,8 +4,9 @@ const session = require("express-session");
 const passport = require("passport");
 const dotenv = require("dotenv");
 const productsRouter = require("./controllers/products");
+const allergenRouter = require("./controllers/allergens");
 const authenticationRouter = require("./controllers/authentication");
-
+const { authenticationMiddleware } = require("./middlewares/authentication");
 require("./utils/passport");
 
 dotenv.config();
@@ -34,8 +35,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(authenticationRouter);
-
-app.use(productsRouter);
+app.use("/products", authenticationMiddleware, productsRouter);
+app.use("/allergens", authenticationMiddleware, allergenRouter);
 
 app.get("/", (req, res) => {
   res.send("Backend is running!");

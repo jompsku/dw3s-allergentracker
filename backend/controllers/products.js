@@ -8,7 +8,7 @@ const {
 } = require("../services/productService");
 const Product = require("../database/models/Product");
 
-productsRouter.post("/products", async (request, response) => {
+productsRouter.post("/", async (request, response) => {
   try {
     const {
       productName: name,
@@ -29,7 +29,7 @@ productsRouter.post("/products", async (request, response) => {
   }
 });
 
-productsRouter.post("/products/:productID", async (request, response) => {
+productsRouter.post("/:productID", async (request, response) => {
   try {
     const productID = request.params.productID;
     const updatedProduct = request.body;
@@ -41,7 +41,7 @@ productsRouter.post("/products/:productID", async (request, response) => {
   }
 });
 
-productsRouter.delete("/products/:id", async (request, response) => {
+productsRouter.delete("/:id", async (request, response) => {
   try {
     const prod = request.params.id;
     await Product.deleteOne({ _id: prod });
@@ -52,7 +52,7 @@ productsRouter.delete("/products/:id", async (request, response) => {
   }
 });
 
-productsRouter.get("/products", async (request, response) => {
+productsRouter.get("/", async (request, response) => {
   const products = await retrieveProducts(request.user_id);
   response.status(200).json(products);
 });

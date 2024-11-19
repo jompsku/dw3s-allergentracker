@@ -17,15 +17,14 @@ import {
   ListItemText,
   ProductDetails,
   useState,
-} from "./index.js"
+} from "./index.js";
 
 export default function BasicCard({ title, contents, isProduct }) {
-  const [open, setOpen] = useState(null)
-
+  const [open, setOpen] = useState(null);
   const handleClick = (index) => {
-    if (open === index) setOpen(null)
-    else setOpen(index)
-  }
+    if (open === index) setOpen(null);
+    else setOpen(index);
+  };
 
   return (
     <Card variant="outlined" sx={{ minHeight: "100%" }}>
@@ -43,7 +42,9 @@ export default function BasicCard({ title, contents, isProduct }) {
               <Fragment key={index}>
                 <ListItemButton onClick={() => handleClick(c._id)}>
                   {isProduct && (
-                    <ListItemIcon>{c.isProblematic ? <ErrorIcon /> : <CheckIcon />}</ListItemIcon>
+                    <ListItemIcon>
+                      {c.isProblematic ? <ErrorIcon /> : <CheckIcon />}
+                    </ListItemIcon>
                   )}
                   <ListItemText primary={c.name} />
                   {open === c._id ? <ExpandLess /> : <ExpandMore />}
@@ -58,7 +59,9 @@ export default function BasicCard({ title, contents, isProduct }) {
               </Fragment>
             ))
           ) : (
-            <p style={{ fontSize: "0.9rem" }}>You have no identified allergens</p>
+            <p style={{ fontSize: "0.9rem" }}>
+              You have no identified allergens
+            </p>
           )}
         </List>
       </CardContent>
@@ -66,5 +69,5 @@ export default function BasicCard({ title, contents, isProduct }) {
         {contents?.length > 10 ? <Button size="small">View more</Button> : null}
       </CardActions>
     </Card>
-  )
+  );
 }
