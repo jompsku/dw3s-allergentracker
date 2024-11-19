@@ -60,7 +60,6 @@ authenticationRouter.get(
 
 authenticationRouter.get("/auth/current_user", (req, res) => {
   if (req.isAuthenticated()) {
-    console.log(req);
     return res.status(200).json({
       id: req.user.id,
       name: req.user.name,

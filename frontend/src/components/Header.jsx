@@ -20,11 +20,10 @@ const pages = [
   { name: `How it works`, url: "/how-it-works", needsLogin: false },
 ];
 
-function Header({}) {
+function Header() {
   const { user, logout } = useAuth();
   const settings = [{ name: "Logout", onClick: logout }];
 
-  console.log(user);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const navigate = useNavigate();
 
