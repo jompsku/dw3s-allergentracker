@@ -23,7 +23,8 @@ const getAllIngredients = (products) => {
 const getCounts = (ingredients) => {
   return ingredients.reduce((acc, ingredient) => {
     acc[ingredient] = (acc[ingredient] || 0) + 1;
-  });
+    return acc;
+  }, {});
 };
 
 const getPossibleAllergens = async () => {
