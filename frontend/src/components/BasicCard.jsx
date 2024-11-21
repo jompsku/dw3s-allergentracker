@@ -19,7 +19,7 @@ import {
 
 export default function BasicCard({ title, contents, isProduct }) {
   const [open, setOpen] = useState(null)
-  const sortedContents = contents?.sort((a, b) => a.name.localeCompare(b.name))
+  const sortedContents = contents?.sort((a, b) => a.name?.localeCompare(b.name))
 
   const handleClick = (index) => {
     if (open === index) setOpen(null)
