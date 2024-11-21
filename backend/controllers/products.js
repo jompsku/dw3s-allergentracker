@@ -15,7 +15,7 @@ productsRouter.post("/", async (request, response) => {
       productIngredients: ingredients,
       productCausesProblems: isProblematic,
     } = request.body;
-    const user_id = request.user_id;
+    const user_id = request.user;
     const product = await addProduct({
       name,
       user_id,
@@ -53,13 +53,13 @@ productsRouter.delete("/:id", async (request, response) => {
 });
 
 productsRouter.get("/", async (request, response) => {
-  const products = await retrieveProducts(request.user_id);
+  const products = await retrieveProducts(request.user);
   response.status(200).json(products);
 });
 
 productsRouter.get("/allergens", async (request, response) => {
   try {
-    const possibleAllergens = await getPossibleAllergens(request.user_id);
+    const possibleAllergens = await getPossibleAllergens(request.user);
     // For the demo, in real application ingredients will have their own ids also
     const res = possibleAllergens.map((item, index) => ({
       _id: index,
