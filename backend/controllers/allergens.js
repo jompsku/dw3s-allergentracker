@@ -3,7 +3,7 @@ const { getPossibleAllergens } = require("../services/allergenService");
 
 allergenRouter.get("/", async (request, response) => {
   try {
-    const possibleAllergens = await getPossibleAllergens(request.user_id);
+    const possibleAllergens = await getPossibleAllergens(request.user);
     // For the demo, in real application ingredients will have their own ids also
     const res = possibleAllergens.map((item, index) => ({
       _id: index,
