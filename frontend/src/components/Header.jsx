@@ -10,27 +10,30 @@ import {
   Tooltip,
   MenuItem,
   AccountCircleSharpIcon,
-} from "./index.js"
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+} from "./index.js";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth.js";
 
 const pages = [
   { name: "User preferences", url: "/user-preferences", needsLogin: true },
   { name: `How it works`, url: "/how-it-works", needsLogin: false },
-]
-const settings = ["Profile", "Logout"]
+];
 
-function Header({ loggedIn }) {
-  const [anchorElUser, setAnchorElUser] = useState(null)
-  const navigate = useNavigate()
+function Header() {
+  const { user, logout } = useAuth();
+  const settings = [{ name: "Logout", onClick: logout }];
+
+  const [anchorElUser, setAnchorElUser] = useState(null);
+  const navigate = useNavigate();
 
   const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget)
-  }
+    setAnchorElUser(event.currentTarget);
+  };
 
   const handleCloseUserMenu = () => {
-    setAnchorElUser(null)
-  }
+    setAnchorElUser(null);
+  };
 
   return (
     <AppBar position="static">
@@ -41,9 +44,10 @@ function Header({ loggedIn }) {
               Allergen Tracker
             </Typography>
           </Button>
+
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages
-              .filter((page) => (page.needsLogin && loggedIn) || !page.needsLogin)
+              .filter((page) => (page.needsLogin && user) || !page.needsLogin)
               .map((page) => (
                 <Button
                   key={page.name}
@@ -54,13 +58,16 @@ function Header({ loggedIn }) {
                 </Button>
               ))}
           </Box>
-          {loggedIn ? (
+          {user && (
             <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <AccountCircleSharpIcon fontSize="large" />
-                </IconButton>
-              </Tooltip>
+              <Box onClick={handleOpenUserMenu}>
+                {user.name} {"(" + user.email + ")"}
+                <Tooltip title="Open settings">
+                  <IconButton sx={{ p: 0 }}>
+                    <AccountCircleSharpIcon fontSize="large" />
+                  </IconButton>
+                </Tooltip>
+              </Box>
               <Menu
                 sx={{ mt: "45px" }}
                 id="menu-appbar"
@@ -78,16 +85,18 @@ function Header({ loggedIn }) {
                 onClose={handleCloseUserMenu}
               >
                 {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography sx={{ textAlign: "center" }}>{setting}</Typography>
+                  <MenuItem key={setting.name} onClick={setting.onClick}>
+                    <Typography sx={{ textAlign: "center" }}>
+                      {setting.name}
+                    </Typography>
                   </MenuItem>
                 ))}
               </Menu>
             </Box>
-          ) : null}
+          )}
         </Toolbar>
       </Container>
     </AppBar>
-  )
+  );
 }
-export default Header
+export default Header;

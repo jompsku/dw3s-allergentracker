@@ -15,16 +15,16 @@ import {
   ListItemText,
   ProductDetails,
   useState,
-} from "./index.js"
+} from "./index.js";
 
 export default function BasicCard({ title, contents, isProduct }) {
   const [open, setOpen] = useState(null)
   const sortedContents = contents?.sort((a, b) => a.name?.localeCompare(b.name))
 
   const handleClick = (index) => {
-    if (open === index) setOpen(null)
-    else setOpen(index)
-  }
+    if (open === index) setOpen(null);
+    else setOpen(index);
+  };
 
   return (
     <Card
@@ -57,13 +57,15 @@ export default function BasicCard({ title, contents, isProduct }) {
           },
         }}
       >
-        <List sx={{width: "480px"}} dense={true}>
+        <List sx={{ width: "480px" }} dense={true}>
           {sortedContents?.length > 0 ? (
             sortedContents?.map((c, index) => (
               <Fragment key={index}>
                 <ListItemButton onClick={() => handleClick(c._id)}>
                   {isProduct && (
-                    <ListItemIcon>{c.isProblematic ? <ErrorIcon /> : <CheckIcon />}</ListItemIcon>
+                    <ListItemIcon>
+                      {c.isProblematic ? <ErrorIcon /> : <CheckIcon />}
+                    </ListItemIcon>
                   )}
                   <ListItemText primary={c.name} />
                   {open === c._id ? <ExpandLess /> : <ExpandMore />}
@@ -78,10 +80,12 @@ export default function BasicCard({ title, contents, isProduct }) {
               </Fragment>
             ))
           ) : (
-            <p style={{ fontSize: "0.9rem" }}>You have no identified allergens</p>
+            <p style={{ fontSize: "0.9rem" }}>
+              You have no identified allergens
+            </p>
           )}
         </List>
       </CardContent>
     </Card>
-  )
+  );
 }
