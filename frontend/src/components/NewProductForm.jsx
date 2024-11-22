@@ -8,10 +8,10 @@ import {
   TextField,
   Typography,
   Box,
-} from "@mui/material"
-import { useState, forwardRef } from "react"
-import { addProduct } from "../services/productService"
-import { useMutation, useQueryClient } from "react-query"
+} from "@mui/material";
+import { useState, forwardRef } from "react";
+import { addProduct } from "../services/productService";
+import { useMutation, useQueryClient } from "react-query";
 
 const style = {
   position: "absolute",
@@ -24,35 +24,37 @@ const style = {
   border: "1px solid #FF7F50",
   borderRadius: "4px",
   p: 4,
-}
+};
 
 const NewProductForm = forwardRef(({ handleClose }, ref) => {
-  const [productName, setProductName] = useState("")
-  const [productIngredients, setProductIngredients] = useState("")
-  const [productCausesProblems, setProductCausesProblems] = useState(false)
-  const queryClient = useQueryClient()
-  
+  const [productName, setProductName] = useState("");
+  const [productIngredients, setProductIngredients] = useState("");
+  const [productCausesProblems, setProductCausesProblems] = useState(false);
+  const queryClient = useQueryClient();
+
   const addMutation = useMutation({
     mutationFn: addProduct,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["products"] })
+      queryClient.invalidateQueries({ queryKey: ["products"] });
     },
-  })
-  
+  });
+
   const handleAdd = async () => {
     const newProduct = {
       productName,
-      productIngredients: productIngredients.split(",").map((i) => i.trim().toLowerCase()),
+      productIngredients: productIngredients
+        .split(",")
+        .map((i) => i.trim().toLowerCase()),
       productCausesProblems,
-    }
-    await addMutation.mutate(newProduct)
-    handleClose()
-  }
+    };
+    addMutation.mutate(newProduct);
+    handleClose();
+  };
 
   const handleScanIngredients = () => {
-    const newIngredients = "Glycerol, ASA, panthenol, Polysorbate 20"
-    setProductIngredients(newIngredients)
-  }
+    const newIngredients = "Glycerol, ASA, panthenol, Polysorbate 20";
+    setProductIngredients(newIngredients);
+  };
 
   return (
     <Box sx={style} component="form" ref={ref} tabIndex={-1}>
@@ -77,7 +79,12 @@ const NewProductForm = forwardRef(({ handleClose }, ref) => {
         onChange={(e) => setProductIngredients(e.target.value)}
         required
       />
-      <Button variant="outlined" onClick={handleScanIngredients} style={{ marginTop: "10px" }}>
+      <Button
+        type="button"
+        variant="outlined"
+        onClick={handleScanIngredients}
+        style={{ marginTop: "10px" }}
+      >
         Or scan a label
       </Button>
       <div>
@@ -97,7 +104,9 @@ const NewProductForm = forwardRef(({ handleClose }, ref) => {
         Add Product
       </Button>
     </Box>
-  )
-})
+  );
+});
 
-export default NewProductForm
+NewProductForm.displayName = "NewProductForm";
+
+export default NewProductForm;
