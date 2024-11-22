@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 
-const GeneralInfoPage = () => {
+const InstructionsPage = () => {
   return (
     <Box>
       <Typography variant="h2" sx={{ marginTop: '25px' }}>User Instructions</Typography>
@@ -84,4 +84,4 @@ const GeneralInfoPage = () => {
   );
 };
 
-export default GeneralInfoPage;
+export default InstructionsPage;

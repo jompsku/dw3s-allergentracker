@@ -10,7 +10,6 @@ import {
   ThemeProvider,
   useState,
   Footer,
-  GeneralInfoPage,
   Header,
   LandingPage,
   LoginPage,
@@ -18,6 +17,7 @@ import {
   PrivacyPolicyPage,
   TosPage,
   AboutPage,
+  InstructionsPage,
 } from "./components/index"
 
 const App = () => {
@@ -52,7 +52,7 @@ const App = () => {
             >
               <Routes>
                 <>
-                  <Route path="/how-it-works" element={<GeneralInfoPage />} />
+                  <Route path="/how-it-works" element={<InstructionsPage />} />
                   <Route path="/about" element={<AboutPage />} />
                   <Route path="/terms-of-service" element={<TosPage />} />
                   <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />

@@ -30,7 +30,7 @@ import ErrorIcon from "@mui/icons-material/Error"
 import ExpandLess from "@mui/icons-material/ExpandLess"
 import ExpandMore from "@mui/icons-material/ExpandMore"
 import Footer from "./Footer"
-import GeneralInfoPage from "./pages/GeneralInfoPage"
+import InstructionsPage from "./pages/InstructionsPage"
 import Header from "./Header"
 import IconButton from "@mui/material/IconButton"
 import IngredientDetails from "./IngredientDetails"
@@ -70,10 +70,10 @@ export {
   FormControlLabel,
   FormLabel,
   Fragment,
-  GeneralInfoPage,
   Header,
   IconButton,
   IngredientDetails,
+  InstructionsPage,
   LandingPage,
   List,
   ListItemButton,
