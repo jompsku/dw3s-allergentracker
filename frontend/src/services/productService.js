@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const baseUrl = "http://localhost:8080";
-const fullUrl = baseUrl + "/products";
+const fullUrl = baseUrl + "/products/";
 
 export const retrieveProducts = async () => {
   const response = await axios.get(fullUrl, {
