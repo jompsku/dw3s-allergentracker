@@ -15,7 +15,6 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 const pages = [
-  { name: "User preferences", url: "/user-preferences", needsLogin: true },
   { name: `How it works`, url: "/how-it-works", needsLogin: false },
 ]
 const settings = ["Profile", "Logout"]

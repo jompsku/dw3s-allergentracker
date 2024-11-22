@@ -15,7 +15,6 @@ import {
   LandingPage,
   LoginPage,
   theme,
-  UserPreferences,
   PrivacyPolicyPage,
   TosPage,
   AboutPage,
@@ -60,7 +59,6 @@ const App = () => {
                   {loggedIn ? (
                     <>
                       <Route path="/" element={<LandingPage />} />
-                      <Route path="/user-preferences" element={<UserPreferences />} />
                       <Route path="/login" element={<Navigate to="/" replace={true} />} />
                     </>
                   ) : (

@@ -46,7 +46,6 @@ import theme from "../themes/theme"
 import Toolbar from "@mui/material/Toolbar"
 import Tooltip from "@mui/material/Tooltip"
 import TosPage from "./pages/TosPage"
-import UserPreferences from "./pages/UserPreferences"
 
 export {
   AboutPage,
@@ -99,6 +98,5 @@ export {
   Tooltip,
   TosPage,
   Typography,
-  UserPreferences,
   useState,
 }
