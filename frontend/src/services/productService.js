@@ -37,3 +37,11 @@ export const retrievePossibleAllergens = async () => {
   });
   return response.data;
 };
+
+// for testing the application
+export const fillDB = async (user_id) => {
+  const response = await axios.get(fullUrl + "testData", {
+    withCredentials: true,
+  });
+  return response.data;
+};

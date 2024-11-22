@@ -1,10 +1,10 @@
 const productsRouter = require("express").Router();
 const { default: mongoose } = require("mongoose");
-const { getPossibleAllergens } = require("../services/allergenService");
 const {
   retrieveProducts,
   addProduct,
   editProduct,
+  fillDB,
 } = require("../services/productService");
 const Product = require("../database/models/Product");
 
@@ -53,8 +53,26 @@ productsRouter.delete("/:id", async (request, response) => {
 });
 
 productsRouter.get("/", async (request, response) => {
-  const products = await retrieveProducts(request.user);
-  response.status(200).json(products);
+  try {
+    const products = await retrieveProducts(request.user);
+    response.status(200).json(products);
+  } catch (err) {
+    response.status(500).json(err);
+  }
+});
+
+productsRouter.get("/testData", async (request, response) => {
+  try {
+    const user_id = request.user;
+    console.log("gdfg")
+    await fillDB(user_id);
+    console.log("gdfg2")
+    const products = await retrieveProducts(user_id);
+    console.log("gdfg3")
+    return response.status(200).json(products);
+  } catch (err) {
+    response.status(500).json({ message: "error while adding test data" });
+  }
 });
 
 module.exports = productsRouter;

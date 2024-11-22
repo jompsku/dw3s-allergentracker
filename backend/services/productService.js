@@ -1,4 +1,5 @@
 const Product = require("../database/models/Product");
+const productsList = require("../../backend/data/testData");
 
 const retrieveProducts = async (user_id) => {
   const products = await Product.find({ user_id });
@@ -11,13 +12,7 @@ const retrieveIngredients = async (id) => {
   return ingredients_list;
 };
 
-const addProduct = async ({
-  name,
-  user_id,
-  isProblematic,
-  ingredients,
-  flagged_ingredients,
-}) => {
+const addProduct = async ({ name, user_id, isProblematic, ingredients, flagged_ingredients }) => {
   const newProduct = await Product.create({
     name,
     user_id,
@@ -29,16 +24,33 @@ const addProduct = async ({
 };
 
 const editProduct = async (productID, updatedProduct) => {
-  const editedProduct = await Product.findOneAndUpdate(
-    { _id: productID },
-    updatedProduct
-  );
+  const editedProduct = await Product.findOneAndUpdate({ _id: productID }, updatedProduct);
   return editedProduct;
 };
 
+// only for testing
+const fillDB = async (user_id) => {
+  productsList.forEach(async (e) => {
+    await addProduct({
+      name: e.name,
+      user_id,
+      isProblematic: e.isProblematic,
+      ingredients: e.ingredients,
+      flagged_ingredients: e.flagged_ingredients,
+    });
+  });
+  return await retrieveProducts(user_id);
+};
+
+const retrieveTestData = async () => {
+  return productsList;
+};
+
 module.exports = {
-  retrieveProducts,
-  retrieveIngredients,
   addProduct,
   editProduct,
+  fillDB,
+  retrieveIngredients,
+  retrieveProducts,
+  retrieveTestData,
 };
