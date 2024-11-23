@@ -1,5 +1,4 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import GeneralInfoPage from "./GeneralInfoPage";
 import LoginPage from "./LoginPage";
 import LandingPage from "./LandingPage";
 import PrivateRoute from "../PrivateRoute";
@@ -8,6 +7,7 @@ import { Container, Typography } from "@mui/material";
 import AboutPage from "./AboutPage";
 import TosPage from "./TosPage";
 import PrivacyPolicyPage from "./PrivacyPolicyPage";
+import InstructionsPage from "./InstructionsPage";
 
 const AppRoutes = () => {
   const { user } = useAuth();
@@ -16,7 +16,7 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/" element={<PrivateRoute element={<LandingPage />} />} />
 
-      <Route path="/how-it-works" element={<GeneralInfoPage />} />
+      <Route path="/how-it-works" element={<InstructionsPage />} />
       <Route path="/about" element={<AboutPage />} />
       <Route path="/terms-of-service" element={<TosPage />} />
       <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
