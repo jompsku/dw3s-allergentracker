@@ -16,7 +16,6 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth.js";
 
 const pages = [
-  { name: "User preferences", url: "/user-preferences", needsLogin: true },
   { name: `How it works`, url: "/how-it-works", needsLogin: false },
 ];
 

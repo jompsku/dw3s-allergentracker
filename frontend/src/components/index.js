@@ -30,7 +30,7 @@ import ErrorIcon from "@mui/icons-material/Error"
 import ExpandLess from "@mui/icons-material/ExpandLess"
 import ExpandMore from "@mui/icons-material/ExpandMore"
 import Footer from "./Footer"
-import GeneralInfoPage from "./pages/GeneralInfoPage"
+import InstructionsPage from "./pages/InstructionsPage"
 import Header from "./Header"
 import IconButton from "@mui/material/IconButton"
 import IngredientDetails from "./IngredientDetails"
@@ -46,7 +46,6 @@ import theme from "../themes/theme"
 import Toolbar from "@mui/material/Toolbar"
 import Tooltip from "@mui/material/Tooltip"
 import TosPage from "./pages/TosPage"
-import UserPreferences from "./pages/UserPreferences"
 
 export {
   AboutPage,
@@ -71,10 +70,10 @@ export {
   FormControlLabel,
   FormLabel,
   Fragment,
-  GeneralInfoPage,
   Header,
   IconButton,
   IngredientDetails,
+  InstructionsPage,
   LandingPage,
   List,
   ListItemButton,
@@ -99,6 +98,5 @@ export {
   Tooltip,
   TosPage,
   Typography,
-  UserPreferences,
   useState,
 }
