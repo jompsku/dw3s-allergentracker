@@ -1,10 +1,12 @@
 const productsRouter = require("express").Router();
 const { default: mongoose } = require("mongoose");
-const { getPossibleAllergens } = require("../services/allergenService");
 const {
   retrieveProducts,
   addProduct,
   editProduct,
+  fillDB,
+  deleteProduct,
+  deleteDB,
 } = require("../services/productService");
 const Product = require("../database/models/Product");
 
@@ -44,17 +46,42 @@ productsRouter.post("/:productID", async (request, response) => {
 productsRouter.delete("/:id", async (request, response) => {
   try {
     const prod = request.params.id;
-    await Product.deleteOne({ _id: prod });
-    response.status(200).send();
+    const deletedProduct = await deleteProduct({ _id: prod });
+    response.status(200).send(deletedProduct);
   } catch (err) {
     console.log(err);
-    response.status(500).json(err);
+    response.status(500).json({ message: "error while deleting product" });
   }
 });
 
 productsRouter.get("/", async (request, response) => {
-  const products = await retrieveProducts(request.user);
-  response.status(200).json(products);
+  try {
+    const products = await retrieveProducts(request.user);
+    response.status(200).json(products);
+  } catch (err) {
+    response.status(500).json(err);
+  }
+});
+
+// only for testing
+productsRouter.get("/testData", async (request, response) => {
+  try {
+    const user_id = request.user;
+    await fillDB(user_id);
+    return response.sendStatus(200);
+  } catch (err) {
+    response.status(500).json({ message: "error while adding test data" });
+  }
+});
+
+productsRouter.get("/deleteProducts", async (request, response) => {
+  try {
+    const user_id = request.user;
+    await deleteDB(user_id);
+    return response.sendStatus(200);
+  } catch (err) {
+    response.status(500).json({ message: "error while deleting products" });
+  }
 });
 
 module.exports = productsRouter;
