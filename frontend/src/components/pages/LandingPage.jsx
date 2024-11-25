@@ -14,7 +14,7 @@ function LandingPage() {
   const mutateDelete = useMutation({
     mutationFn: deleteDB,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["products"] });
+      mutateAdd.mutate();
     },
   });
 
@@ -38,7 +38,6 @@ function LandingPage() {
             sx={{ backgroundColor: "gray" }}
             onClick={() => {
               mutateDelete.mutate();
-              mutateAdd.mutate();
             }}
           >
             Add test data

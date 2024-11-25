@@ -36,14 +36,17 @@ const editProduct = async (productID, updatedProduct) => {
 // only for testing
 const deleteDB = async (user_id) => {
   const products = await retrieveProducts(user_id);
-  products.forEach(async (e) => {
+  console.log(products);
+  
+  for (let e of products) {
+    console.log(e);
+    
     await deleteProduct(e._id);
-  });
-  return await retrieveProducts(user_id);
+  }
 };
 
 const fillDB = async (user_id) => {
-  productsList.forEach(async (e) => {
+  for (let e of productsList) {
     await addProduct({
       name: e.name,
       user_id,
@@ -51,8 +54,7 @@ const fillDB = async (user_id) => {
       ingredients: e.ingredients,
       flagged_ingredients: e.flagged_ingredients,
     });
-  });
-  return await retrieveProducts(user_id);
+  }
 };
 
 const retrieveTestData = async () => {
