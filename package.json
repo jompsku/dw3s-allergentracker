@@ -6,6 +6,9 @@
     "install:all": "npm install && cd frontend && npm install && cd ../backend && npm install",
     "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
     "start:frontend": "cd frontend && npm run dev",
-    "start:backend": "cd backend && npm run dev"
+    "start:backend": "cd backend && npm run dev",
+    "prod": "npm run build && npm run serve",
+    "build": "cd frontend && npm run build",
+    "serve": "cd backend && npm start"
   }
 }
