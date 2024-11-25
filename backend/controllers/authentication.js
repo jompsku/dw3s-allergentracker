@@ -3,12 +3,14 @@ const authenticationRouter = require("express").Router();
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const User = require("../database/models/User");
 
+const baseUrl = process.env.REACT_APP_BASE_URL || "http://localhost:8080";
+
 passport.use(
   new GoogleStrategy(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: process.env.GOOGLE_CALLBACK_URL || `http://localhost:8080/auth/google/callback`,
+      callbackURL: `${baseUrl}/auth/google/callback`,
     },
 
     async (accessToken, refreshToken, profile, done) => {
@@ -38,10 +40,10 @@ authenticationRouter.get(
 authenticationRouter.get(
   "/auth/google/callback",
   passport.authenticate("google", {
-    failureRedirect: process.env.FAILURE_REDIRECT_URL || "http://localhost:8080/login",
+    failureRedirect: `${baseUrl}/login`,
   }),
   (req, res) => {
-    res.redirect(process.env.SUCCESS_REDIRECT_URL || "http://localhost:8080");
+    res.redirect(`${baseUrl}`);
   }
 );
 

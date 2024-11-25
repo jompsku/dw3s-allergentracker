@@ -5,7 +5,8 @@ function LoginPage() {
   const providers = [{ id: "google", name: "Google" }];
 
   const handleLogin = () => {
-    window.location.href = "http://localhost:8080/auth/google";
+    const baseUrl = process.env.REACT_APP_BASE_URL || "http://localhost:8080";
+    window.location.href = `${baseUrl}/auth/google`;
   };
 
   return (
