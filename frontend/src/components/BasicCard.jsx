@@ -18,8 +18,8 @@ import {
 } from "./index.js";
 
 export default function BasicCard({ title, contents, isProduct }) {
-  const [open, setOpen] = useState(null)
-  const sortedContents = contents?.sort((a, b) => a.name?.localeCompare(b.name))
+  const [open, setOpen] = useState(null);
+  const sortedContents = contents?.sort((a, b) => a.name?.localeCompare(b.name));
 
   const handleClick = (index) => {
     if (open === index) setOpen(null);
@@ -63,9 +63,7 @@ export default function BasicCard({ title, contents, isProduct }) {
               <Fragment key={index}>
                 <ListItemButton onClick={() => handleClick(c._id)}>
                   {isProduct && (
-                    <ListItemIcon>
-                      {c.isProblematic ? <ErrorIcon /> : <CheckIcon />}
-                    </ListItemIcon>
+                    <ListItemIcon>{c.isProblematic ? <ErrorIcon /> : <CheckIcon />}</ListItemIcon>
                   )}
                   <ListItemText primary={c.name} />
                   {open === c._id ? <ExpandLess /> : <ExpandMore />}
@@ -81,7 +79,7 @@ export default function BasicCard({ title, contents, isProduct }) {
             ))
           ) : (
             <p style={{ fontSize: "0.9rem" }}>
-              You have no identified allergens
+              You have no {isProduct ? "products" : "identified allergens"}
             </p>
           )}
         </List>
