@@ -1,22 +1,29 @@
-import AllergenProductCards from "../AllergenProductCards.jsx"
-import Info from "../Info.jsx"
-import { Box, Button, Container, Modal, Tooltip, useState } from "../index.js"
-import NewProductForm from "../NewProductForm.jsx"
-import { fillDB } from "../../services/productService"
-import { useMutation, useQueryClient } from "react-query"
+import AllergenProductCards from "../AllergenProductCards.jsx";
+import Info from "../Info.jsx";
+import { Box, Button, Container, Modal, Tooltip, useState } from "../index.js";
+import NewProductForm from "../NewProductForm.jsx";
+import { fillDB, deleteDB } from "../../services/productService";
+import { useMutation, useQueryClient } from "react-query";
 
 function LandingPage() {
-  const [open, setOpen] = useState(false)
-  const handleAddClick = () => setOpen(true)
-  const handleClose = () => setOpen(false)
-  const queryClient = useQueryClient()
+  const [open, setOpen] = useState(false);
+  const handleAddClick = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const queryClient = useQueryClient();
 
-  const testDataMutation = useMutation({
+  const mutateDelete = useMutation({
+    mutationFn: deleteDB,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["products"] });
+    },
+  });
+
+  const mutateAdd = useMutation({
     mutationFn: fillDB,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["products"] })
+      queryClient.invalidateQueries({ queryKey: ["products"] });
     },
-  })
+  });
 
   return (
     <Container>
@@ -25,11 +32,14 @@ function LandingPage() {
         <Button variant="contained" onClick={handleAddClick}>
           Add product
         </Button>
-        <Tooltip title="Button added to help the course personnel to test the application">
+        <Tooltip title="Button added to help the course personnel to test the application: deletes current user's products and refills database with test data.">
           <Button
             variant="contained"
             sx={{ backgroundColor: "gray" }}
-            onClick={() => testDataMutation.mutate()}
+            onClick={() => {
+              mutateDelete.mutate();
+              mutateAdd.mutate();
+            }}
           >
             Add test data
           </Button>
@@ -40,7 +50,7 @@ function LandingPage() {
       </Modal>
       <AllergenProductCards />
     </Container>
-  )
+  );
 }
 
-export default LandingPage
+export default LandingPage;

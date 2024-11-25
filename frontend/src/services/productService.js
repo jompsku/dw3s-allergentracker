@@ -45,3 +45,10 @@ export const fillDB = async (user_id) => {
   });
   return response.data;
 };
+
+export const deleteDB = async (user_id) => {
+  const response = await axios.get(fullUrl + "deleteProducts", {
+    withCredentials: true,
+  });
+  return response.data;
+};
