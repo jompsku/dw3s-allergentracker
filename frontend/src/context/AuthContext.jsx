@@ -7,22 +7,15 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-      setLoading(false);
-    } else {
-      axios
-        .get("http://localhost:8080/auth/current_user", {
-          withCredentials: true,
-        })
-        .then((response) => {
-          setUser(response.data);
-          localStorage.setItem("user", JSON.stringify(response.data));
-        })
-        .catch(() => setUser(null))
-        .finally(() => setLoading(false));
-    }
+    axios
+    .get("http://localhost:8080/auth/current_user", {
+      withCredentials: true,
+    })
+    .then((response) => {
+      setUser(response.data);
+    })
+    .catch(() => setUser(null))
+    .finally(() => setLoading(false));
   }, []);
 
   const logout = async () => {
@@ -31,14 +24,13 @@ export const AuthProvider = ({ children }) => {
         withCredentials: true,
       });
       setUser(null);
-      localStorage.removeItem("user");
     } catch (error) {
       console.error("Error logging out:", error);
     }
   };
   return (
     <AuthContext.Provider value={{ user, loading, logout }}>
-      {children}
+      {loading ? "Loading..." : children}
     </AuthContext.Provider>
   );
 };
