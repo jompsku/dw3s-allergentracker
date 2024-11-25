@@ -38,10 +38,10 @@ authenticationRouter.get(
 authenticationRouter.get(
   "/auth/google/callback",
   passport.authenticate("google", {
-    failureRedirect: "http://localhost:5173/login",
+    failureRedirect: "http://localhost:8080/login",
   }),
   (req, res) => {
-    res.redirect("http://localhost:5173");
+    res.redirect("http://localhost:8080");
   }
 );
 

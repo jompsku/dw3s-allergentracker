@@ -3,6 +3,7 @@ const express = require("express");
 const session = require("express-session");
 const passport = require("passport");
 const dotenv = require("dotenv");
+const path = require('path');
 const productsRouter = require("./controllers/products");
 const allergenRouter = require("./controllers/allergens");
 const authenticationRouter = require("./controllers/authentication");
@@ -15,7 +16,6 @@ const app = express();
 
 const corsOptions = {
   origin: process.env.NODE_ENV === "production" ? "https://allergentracker.onrender.com" : "http://localhost:5173",
-  credentials: true,
   credentials: true,
 };
 app.use(cors(corsOptions));
@@ -34,6 +34,8 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
 app.use(authenticationRouter);
 app.use("/products", authenticationMiddleware, productsRouter);
