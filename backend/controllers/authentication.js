@@ -24,7 +24,6 @@ passport.use(
             is_admin: false,
           });
         }
-        console.log(user);
         done(null, user);
       } catch (error) {
         done(error, null);
@@ -44,6 +43,7 @@ authenticationRouter.get(
     failureRedirect: `${baseUrl}/login`,
   }),
   (req, res) => {
+    console.log("Successfully authenticated:", req.user);
     res.redirect(`${baseUrl}`);
   }
 );
