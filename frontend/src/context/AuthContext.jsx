@@ -2,7 +2,7 @@ import { createContext, useState, useEffect } from "react";
 import axios from "axios";
 
 export const AuthContext = createContext();
-const baseUrl = import.meta.env.REACT_APP_BASE_URL || "http://localhost:8080";
+const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:8080";
 
 export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
