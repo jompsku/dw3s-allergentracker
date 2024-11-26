@@ -37,7 +37,7 @@ app.use(
       sameSite: "None",
     },
     store: new MongoStore({
-      mongooseConnection: mongoose.connection,
+      uri: process.env.MONGODB_URI,
       collection: "sessions",
     }),
   })
