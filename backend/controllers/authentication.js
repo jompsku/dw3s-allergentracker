@@ -24,6 +24,7 @@ passport.use(
             is_admin: false,
           });
         }
+        console.log(user);
         done(null, user);
       } catch (error) {
         done(error, null);
