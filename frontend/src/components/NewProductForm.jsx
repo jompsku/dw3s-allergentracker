@@ -12,6 +12,7 @@ import {
 import { useState, forwardRef } from "react";
 import { addProduct } from "../services/productService";
 import { useMutation, useQueryClient } from "react-query";
+import IngredientOCRWithCrop from "./IngredientOCRWithCrop";
 
 const NewProductForm = forwardRef(({ handleClose }, ref) => {
   const [productName, setProductName] = useState("");
@@ -29,16 +30,13 @@ const NewProductForm = forwardRef(({ handleClose }, ref) => {
   const handleAdd = async () => {
     const newProduct = {
       productName,
-      productIngredients: productIngredients.split(",").map((i) => i.trim().toLowerCase()),
+      productIngredients: productIngredients
+        .split(",")
+        .map((i) => i.trim().toLowerCase()),
       productCausesProblems,
     };
     addMutation.mutate(newProduct);
     handleClose();
-  };
-
-  const handleScanIngredients = () => {
-    const newIngredients = "Glycerol, ASA, panthenol, Polysorbate 20";
-    setProductIngredients(newIngredients);
   };
 
   return (
@@ -65,14 +63,9 @@ const NewProductForm = forwardRef(({ handleClose }, ref) => {
           onChange={(e) => setProductIngredients(e.target.value)}
           required
         />
-        <Button
-          type="button"
-          variant="outlined"
-          onClick={handleScanIngredients}
-          style={{ marginTop: "10px" }}
-        >
-          Or scan a label
-        </Button>
+        <IngredientOCRWithCrop
+          {...{ productIngredients, setProductIngredients }}
+        />
         <div>
           <FormControl component="fieldset" margin="normal">
             <FormLabel component="legend">Causes problems</FormLabel>
