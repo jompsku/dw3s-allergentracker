@@ -43,7 +43,7 @@ authenticationRouter.get(
     failureRedirect: `${baseUrl}/login`,
   }),
   (req, res) => {
-    console.log("Successfully authenticated:", req.user);
+    console.log("Successfully authenticated:", req.session);
     res.redirect(`${baseUrl}`);
   }
 );
