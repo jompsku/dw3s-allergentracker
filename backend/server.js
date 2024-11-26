@@ -32,9 +32,11 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
+      domain: "dw3s-allergenservice.online",
+      path: "/",
       maxAge: 1000 * 60 * 60 * 24,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "none",
+      sameSite: "lax",
     },
     store: new MongoStore({
       uri: process.env.MONGODB_URI,
