@@ -38,6 +38,7 @@ app.use(
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
     },
+    proxy: true,
     store: new MongoStore({
       uri: process.env.MONGODB_URI,
       collection: "sessions",
