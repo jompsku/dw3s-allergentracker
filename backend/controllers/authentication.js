@@ -10,7 +10,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: `https://allergentracker.onrender.com/auth/google/callback`,
+      callbackURL: `https://backend.dw3s-allergenservice.online/auth/google/callback`,
     },
 
     async (accessToken, refreshToken, profile, done) => {
