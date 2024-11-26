@@ -1,12 +1,15 @@
 import AllergenProductCards from "../AllergenProductCards.jsx";
 import Info from "../Info.jsx";
-import { Box, Button, Container, Modal, Tooltip, useState } from "../index.js";
+import { Box, Button, Container, Modal, theme, Tooltip, useState } from "../index.js";
 import NewProductForm from "../NewProductForm.jsx";
 import { fillDB, deleteDB } from "../../services/productService";
 import { useMutation, useQueryClient } from "react-query";
 
 function LandingPage() {
   const [open, setOpen] = useState(false);
+  const [modal, setModal] = useState(false);
+  const handleOpenModal = () => setModal(true);
+  const handleCloseModal = () => setModal(false);
   const handleAddClick = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const queryClient = useQueryClient();
@@ -32,18 +35,40 @@ function LandingPage() {
         <Button variant="contained" onClick={handleAddClick}>
           Add product
         </Button>
-        <Tooltip title="Button added to help the course personnel to test the application: deletes current user's products and refills database with test data.">
-          <Button
-            variant="contained"
-            sx={{ backgroundColor: "gray" }}
-            onClick={() => {
-              mutateDelete.mutate();
-            }}
-          >
+        <Tooltip title="Button added to help the course personnel to test the application.">
+          <Button variant="contained" sx={{ backgroundColor: "gray" }} onClick={handleOpenModal}>
             Add test data
           </Button>
         </Tooltip>
       </Box>
+      <Modal open={modal} onClose={handleCloseModal}>
+        <Box sx={(theme) => theme.components.Modal}>
+          <Box sx={(theme) => ({ ...theme.typography.subtitle2, mb: 3 })}>
+            Are you sure you want to delete all your products from the database and refill it with
+            test data?
+          </Box>
+          <Button
+            type="submit"
+            variant="contained"
+            onClick={() => {
+              mutateDelete.mutate();
+              handleCloseModal();
+            }}
+          >
+            Continue
+          </Button>
+          <Button
+            type="submit"
+            variant="contained"
+            sx={{ ml: 1, backgroundColor: "gray" }}
+            onClick={() => {
+              handleCloseModal();
+            }}
+          >
+            Cancel
+          </Button>
+        </Box>
+      </Modal>
       <Modal open={open} onClose={handleClose}>
         <NewProductForm handleClose={handleClose} />
       </Modal>
