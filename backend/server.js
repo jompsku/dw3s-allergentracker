@@ -34,7 +34,7 @@ app.use(
     cookie: {
       maxAge: 1000 * 60 * 60 * 24,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "None",
+      sameSite: "none",
     },
     store: new MongoStore({
       uri: process.env.MONGODB_URI,
