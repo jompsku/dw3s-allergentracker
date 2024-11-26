@@ -19,7 +19,7 @@ const app = express();
 const corsOptions = {
   origin:
     process.env.NODE_ENV === "production"
-      ? "https://frontend.dw3s-allergentracker.online"
+      ? "https://frontend.dw3s-allergenservice.online"
       : "http://localhost:5173",
   credentials: true,
 };
