@@ -8,6 +8,7 @@ const productsRouter = require("./controllers/products");
 const allergenRouter = require("./controllers/allergens");
 const authenticationRouter = require("./controllers/authentication");
 const { authenticationMiddleware } = require("./middlewares/authentication");
+const MongoStore = require("connect-mongo")(session);
 require("./utils/passport");
 
 dotenv.config();
@@ -35,6 +36,7 @@ app.use(
       httpOnly: true,
       sameSite: "None",
     },
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
   })
 );
 app.use(passport.initialize());
