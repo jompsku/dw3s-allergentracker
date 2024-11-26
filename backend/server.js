@@ -47,9 +47,9 @@ app.use(passport.session());
 
 app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
-app.use("/api", authenticationRouter);
-app.use("api/products", authenticationMiddleware, productsRouter);
-app.use("api/allergens", authenticationMiddleware, allergenRouter);
+app.use(authenticationRouter);
+app.use("/products", authenticationMiddleware, productsRouter);
+app.use("/allergens", authenticationMiddleware, allergenRouter);
 
 app.get("api/", (req, res) => {
   res.send("Backend is running!");
