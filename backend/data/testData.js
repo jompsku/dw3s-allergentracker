@@ -46,8 +46,8 @@ const productsList = [
     ],
   },
   {
-    isProblematic: false,
-    name: "VICHY MINÉRAL 89 DAILY BOOSTER 50 ML",
+    isProblematic: true,
+    name: "Vichy Minéral 89 daily booster 50 ml",
     ingredients: [
       "Aqua",
       "propanediol",
@@ -66,7 +66,7 @@ const productsList = [
   },
   {
     isProblematic: false,
-    name: "LOUIS WIDMER EYE CONTOUR CREAM HAJUSTEETON 30 ML",
+    name: "Louis Widmer Eye Contour Cream hajusteeton 30 ml",
     ingredients: [
       "Aqua",
       "ethylhexyl isostearate",
@@ -96,7 +96,7 @@ const productsList = [
   },
   {
     isProblematic: true,
-    name: "ACO FACE GLOW BOOSTER C",
+    name: "Aco Face Glow Booster C",
     ingredients: [
       "Aqua",
       "1,2-hexanediol",
@@ -124,7 +124,7 @@ const productsList = [
   },
   {
     isProblematic: true,
-    name: "MEDIK8 ADVANCED NIGHT RESTORE",
+    name: "Medik8 Advanced Night Restore",
     ingredients: [
       "Aqua (water)",
       "squalane",
@@ -175,8 +175,8 @@ const productsList = [
     ],
   },
   {
-    isProblematic: false,
-    name: "BEPANTHOL SENSICONTROL DAILY MOISTURIZING CREAM",
+    isProblematic: true,
+    name: "Bepanthol Sensicontrol Daily Moisturizing Cream",
     ingredients: [
       "Aqua",
       "caprylic/capric triglyceride",

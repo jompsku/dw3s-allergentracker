@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   FormControl,
   FormControlLabel,
@@ -7,24 +8,11 @@ import {
   RadioGroup,
   TextField,
   Typography,
-  Box,
 } from "@mui/material";
 import { useState, forwardRef } from "react";
 import { addProduct } from "../services/productService";
 import { useMutation, useQueryClient } from "react-query";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  boxShadow: 24,
-  border: "1px solid #FF7F50",
-  borderRadius: "4px",
-  p: 4,
-};
+import IngredientOCRWithCrop from "./IngredientOCRWithCrop";
 
 const NewProductForm = forwardRef(({ handleClose }, ref) => {
   const [productName, setProductName] = useState("");
@@ -51,58 +39,60 @@ const NewProductForm = forwardRef(({ handleClose }, ref) => {
     handleClose();
   };
 
-  const handleScanIngredients = () => {
-    const newIngredients = "Glycerol, ASA, panthenol, Polysorbate 20";
-    setProductIngredients(newIngredients);
-  };
-
   return (
-    <Box sx={style} component="form" ref={ref} tabIndex={-1}>
-      <Typography variant="h4" gutterBottom style={{ color: "#FF7F50" }}>
-        Add product
-      </Typography>
-      <TextField
-        label="Name"
-        fullWidth
-        margin="normal"
-        value={productName}
-        onChange={(e) => setProductName(e.target.value)}
-        required
-      />
-      <TextField
-        label="Ingredients"
-        fullWidth
-        multiline
-        rows={4}
-        margin="normal"
-        value={productIngredients}
-        onChange={(e) => setProductIngredients(e.target.value)}
-        required
-      />
-      <Button
-        type="button"
-        variant="outlined"
-        onClick={handleScanIngredients}
-        style={{ marginTop: "10px" }}
-      >
-        Or scan a label
-      </Button>
-      <div>
-        <FormControl component="fieldset" margin="normal">
-          <FormLabel component="legend">Causes problems</FormLabel>
-          <RadioGroup
-            row
-            value={productCausesProblems}
-            onChange={(e) => setProductCausesProblems(e.target.value)}
-          >
-            <FormControlLabel value={true} control={<Radio />} label="Yes" />
-            <FormControlLabel value={false} control={<Radio />} label="No" />
-          </RadioGroup>
-        </FormControl>
-      </div>
-      <Button type="submit" variant="contained" onClick={() => handleAdd()}>
-        Add Product
-      </Button>
+    <Box sx={(theme) => theme.components.Modal} ref={ref} tabIndex={-1}>
+      <form onSubmit={handleAdd}>
+        <Typography variant="h4" gutterBottom style={{ color: "#FF7F50" }}>
+          Add product
+        </Typography>
+        <TextField
+          label="Name"
+          fullWidth
+          margin="normal"
+          value={productName}
+          onChange={(e) => setProductName(e.target.value)}
+          required
+        />
+        <TextField
+          label="Ingredients"
+          fullWidth
+          multiline
+          rows={4}
+          margin="normal"
+          value={productIngredients}
+          onChange={(e) => setProductIngredients(e.target.value)}
+          required
+        />
+        <IngredientOCRWithCrop
+          {...{ productIngredients, setProductIngredients }}
+        />
+        <div>
+          <FormControl component="fieldset" margin="normal">
+            <FormLabel component="legend">Causes problems</FormLabel>
+            <RadioGroup
+              row
+              value={productCausesProblems}
+              onChange={(e) => setProductCausesProblems(e.target.value)}
+            >
+              <FormControlLabel value={true} control={<Radio />} label="Yes" />
+              <FormControlLabel value={false} control={<Radio />} label="No" />
+            </RadioGroup>
+          </FormControl>
+        </div>
+        <Button type="submit" variant="contained">
+          Add Product
+        </Button>
+        <Button
+          type="reset"
+          variant="contained"
+          sx={{ ml: 1, backgroundColor: "gray" }}
+          onClick={() => {
+            handleClose();
+          }}
+        >
+          Cancel
+        </Button>
+      </form>
     </Box>
   );
 });

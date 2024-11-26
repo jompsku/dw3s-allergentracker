@@ -1,6 +1,6 @@
-import { createTheme } from "@mui/material"
-import "@fontsource/martel"
-import "@fontsource/open-sans"
+import { createTheme } from "@mui/material";
+import "@fontsource/martel";
+import "@fontsource/open-sans";
 
 const theme = createTheme({
   palette: {
@@ -50,7 +50,19 @@ const theme = createTheme({
         root: { ".MuiTypography": { fontSize: "13px" } },
       },
     },
+    Modal: {
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      width: 400,
+      bgcolor: "background.paper",
+      boxShadow: 24,
+      border: "1px solid #FF7F50",
+      borderRadius: "4px",
+      p: 3,
+    },
   },
-})
+});
 
-export default theme
+export default theme;
