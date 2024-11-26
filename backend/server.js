@@ -4,11 +4,12 @@ const session = require("express-session");
 const passport = require("passport");
 const dotenv = require("dotenv");
 const path = require("path");
+const mongoose = require("./database/mongo");
 const productsRouter = require("./controllers/products");
 const allergenRouter = require("./controllers/allergens");
 const authenticationRouter = require("./controllers/authentication");
 const { authenticationMiddleware } = require("./middlewares/authentication");
-const MongoStore = require("connect-mongo")(session);
+const MongoStore = require("connect-mongodb-session")(session);
 require("./utils/passport");
 
 dotenv.config();
@@ -35,7 +36,10 @@ app.use(
       secure: process.env.NODE_ENV === "production",
       sameSite: "None",
     },
-    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    store: new MongoStore({
+      mongooseConnection: mongoose.connection,
+      collection: "sessions",
+    }),
   })
 );
 app.use(passport.initialize());
