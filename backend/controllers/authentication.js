@@ -67,15 +67,12 @@ authenticationRouter.get("/logout", (req, res) => {
     }
     req.session.destroy((err) => {
       if (err) {
-        return res
-          .status(500)
-          .json({ message: "Session destruction failed", error: err });
+        return res.status(500).json({ message: "Session destruction failed", error: err });
       }
 
       // Clear the session cookie by setting it to an expired value
       res.clearCookie("connect.sid");
-
-      return res.redirect("/");
+      res.sendStatus(200);
     });
   });
 });
