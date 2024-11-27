@@ -1,10 +1,12 @@
 import { createContext, useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext();
 const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:8080";
 
 export const AuthProvider = ({ children }) => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   useEffect(() => {
@@ -25,6 +27,7 @@ export const AuthProvider = ({ children }) => {
         withCredentials: true,
       });
       setUser(null);
+      navigate("/login");
     } catch (error) {
       console.error("Error logging out:", error);
     }
