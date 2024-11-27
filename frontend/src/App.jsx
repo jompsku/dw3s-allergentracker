@@ -9,34 +9,37 @@ import {
   theme,
 } from "./components/index";
 import AppRoutes from "./components/pages/AppRoutes";
+import { AuthProvider } from "./context/AuthContext";
 
 const App = () => {
   return (
     <BrowserRouter>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Box
-          sx={{
-            height: "100vh",
-            display: "flex",
-            flexDirection: "column",
-            minWidth: "530px",
-          }}
-        >
-          <Header />
-          <Container
+      <AuthProvider>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Box
             sx={{
+              height: "100vh",
               display: "flex",
               flexDirection: "column",
-              alignItems: "center",
-              flex: 1,
+              minWidth: "530px",
             }}
           >
-            <AppRoutes />
-          </Container>
-          <Footer />
-        </Box>
-      </ThemeProvider>
+            <Header />
+            <Container
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                flex: 1,
+              }}
+            >
+              <AppRoutes />
+            </Container>
+            <Footer />
+          </Box>
+        </ThemeProvider>
+      </AuthProvider>
     </BrowserRouter>
   );
 };
