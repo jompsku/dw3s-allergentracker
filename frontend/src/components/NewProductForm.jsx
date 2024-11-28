@@ -40,7 +40,26 @@ const NewProductForm = forwardRef(({ handleClose }, ref) => {
   };
 
   return (
-    <Box sx={(theme) => ({...theme.components.Modal, width: matches ? "unset" : "100%" })} ref={ref} tabIndex={-1}>
+    <Box
+      sx={(theme) => ({
+        ...theme.components.Modal,
+        width: matches ? "unset" : "100%",
+        height: "500px",
+        overflow: "auto",
+        "&::-webkit-scrollbar": {
+          width: "0.5em",
+        },
+        "&::-webkit-scrollbar-track": {
+          boxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
+          webkitBoxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
+        },
+        "&::-webkit-scrollbar-thumb": {
+          backgroundColor: "rgba(0,0,0,.1)",
+        },
+      })}
+      ref={ref}
+      tabIndex={-1}
+    >
       <form onSubmit={handleAdd}>
         <Typography variant="h4" gutterBottom style={{ color: "#FF7F50" }}>
           Add product
