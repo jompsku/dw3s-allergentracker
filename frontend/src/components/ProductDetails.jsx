@@ -10,45 +10,45 @@ import {
   Radio,
   RadioGroup,
   TextField,
-} from "./index.js"
-import { deleteProduct, editProduct } from "../services/productService"
-import { useMutation, useQueryClient } from "react-query"
-import { useState } from "react"
+} from "./index.js";
+import { deleteProduct, editProduct } from "../services/productService";
+import { useMutation, useQueryClient } from "react-query";
+import { useState } from "react";
 
 const ProductDetails = ({ product }) => {
-  const [editing, setEditing] = useState(false)
-  const [productCausesProblems, setProductCausesProblems] = useState(product.isProblematic)
-  const [productName, setProductName] = useState(product.name)
-  const [productIngredients, setProductIngredients] = useState(product.ingredients.join(", "))
+  const [editing, setEditing] = useState(false);
+  const [productCausesProblems, setProductCausesProblems] = useState(product.isProblematic);
+  const [productName, setProductName] = useState(product.name);
+  const [productIngredients, setProductIngredients] = useState(product.ingredients.join(", "));
 
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
   const deleteMutation = useMutation({
     mutationFn: deleteProduct,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["products"] })
+      queryClient.invalidateQueries({ queryKey: ["products"] });
     },
-  })
+  });
 
   const editMutation = useMutation({
     mutationFn: editProduct,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["products"] })
+      queryClient.invalidateQueries({ queryKey: ["products"] });
     },
-  })
+  });
 
   const handleEdit = () => {
-    setEditing(true)
-  }
+    setEditing(true);
+  };
 
   const handleEditSubmit = () => {
     const editedProduct = {
       name: productName,
       ingredients: productIngredients.split(",").map((i) => i.trim().toLowerCase()),
       isProblematic: productCausesProblems,
-    }
-    editMutation.mutate({ product, editedProduct })
-    setEditing(false)
-  }
+    };
+    editMutation.mutate({ product, editedProduct });
+    setEditing(false);
+  };
 
   return (
     <Card sx={{ margin: "10px", padding: "15px", backgroundColor: "#faf5f0" }}>
@@ -88,7 +88,9 @@ const ProductDetails = ({ product }) => {
         </Box>
       ) : (
         <Box sx={{ margin: "1rem" }}>
-          <Typography fontWeight={"bold"}>{product.name}</Typography>
+          <Typography sx={{ wordBreak: "break-word" }} fontWeight={"bold"}>
+            {product.name}
+          </Typography>
           <h5>Ingredients:</h5>
           <Typography style={{ fontSize: "13px" }}>
             {product.ingredients?.map((i) => `${i}`).join(`, `)}
@@ -107,7 +109,7 @@ const ProductDetails = ({ product }) => {
         </Box>
       )}
     </Card>
-  )
-}
+  );
+};
 
-export default ProductDetails
+export default ProductDetails;

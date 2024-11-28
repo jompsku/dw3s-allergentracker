@@ -17,7 +17,7 @@ const IngredientDetails = ({ ingredient }) => {
           justifyContent: "space-between",
         }}
       >
-        <Typography fontWeight={"bold"} fontSize="0.9rem" sx={{marginBottom: "1rem"}}>
+        <Typography fontWeight={"bold"} fontSize="0.9rem" sx={{ marginBottom: "1rem" }}>
           Products that include {ingredient.name}:
         </Typography>
         <Tooltip title="Bolded products have been causing symptoms.">
@@ -26,7 +26,7 @@ const IngredientDetails = ({ ingredient }) => {
       </Box>
       {hasProducts?.map((p, index) =>
         p.isProblematic ? (
-          <Typography fontWeight={"bold"} key={index}>
+          <Typography sx={{ wordBreak: "break-word" }} fontWeight={"bold"} key={index}>
             {p.name}
           </Typography>
         ) : (

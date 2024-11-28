@@ -1,3 +1,4 @@
+import { useMediaQuery } from "@mui/material";
 import {
   Card,
   CardContent,
@@ -20,6 +21,7 @@ import {
 export default function BasicCard({ title, contents, isProduct }) {
   const [open, setOpen] = useState(null);
   const sortedContents = contents?.sort((a, b) => a.name?.localeCompare(b.name));
+  const matches = useMediaQuery("(min-width:670px)");
 
   const handleClick = (index) => {
     if (open === index) setOpen(null);
@@ -37,12 +39,14 @@ export default function BasicCard({ title, contents, isProduct }) {
       <CardHeader
         sx={{
           backgroundColor: "primary.main",
+          padding: matches ? 1.5 : 1,
           color: "white",
         }}
         title={title}
       />
       <CardContent
         sx={{
+          padding: 0,
           height: "500px",
           overflow: "auto",
           "&::-webkit-scrollbar": {
@@ -57,7 +61,7 @@ export default function BasicCard({ title, contents, isProduct }) {
           },
         }}
       >
-        <List sx={{ width: "480px" }} dense={true}>
+        <List dense={true}>
           {sortedContents?.length > 0 ? (
             sortedContents?.map((c, index) => (
               <Fragment key={index}>
@@ -65,7 +69,10 @@ export default function BasicCard({ title, contents, isProduct }) {
                   {isProduct && (
                     <ListItemIcon>{c.isProblematic ? <ErrorIcon /> : <CheckIcon />}</ListItemIcon>
                   )}
-                  <ListItemText primary={c.name} />
+                  <ListItemText
+                    primaryTypographyProps={{sx: { overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis" }}}
+                    primary={c.name}
+                  />
                   {open === c._id ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
                 <Collapse in={open === c._id} timeout="auto" unmountOnExit>

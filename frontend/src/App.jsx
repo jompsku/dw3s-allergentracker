@@ -22,12 +22,13 @@ const App = () => {
               height: "100vh",
               display: "flex",
               flexDirection: "column",
-              minWidth: "530px",
+              minWidth: "370px",
             }}
           >
             <Header />
             <Container
               sx={{
+                p: 1,
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",

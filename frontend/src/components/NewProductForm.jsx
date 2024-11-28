@@ -8,6 +8,7 @@ import {
   RadioGroup,
   TextField,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import { useState, forwardRef } from "react";
 import { addProduct } from "../services/productService";
@@ -19,6 +20,7 @@ const NewProductForm = forwardRef(({ handleClose }, ref) => {
   const [productIngredients, setProductIngredients] = useState("");
   const [productCausesProblems, setProductCausesProblems] = useState(false);
   const queryClient = useQueryClient();
+  const matches = useMediaQuery("(min-width:670px)");
 
   const addMutation = useMutation({
     mutationFn: addProduct,
@@ -30,9 +32,7 @@ const NewProductForm = forwardRef(({ handleClose }, ref) => {
   const handleAdd = async () => {
     const newProduct = {
       productName,
-      productIngredients: productIngredients
-        .split(",")
-        .map((i) => i.trim().toLowerCase()),
+      productIngredients: productIngredients.split(",").map((i) => i.trim().toLowerCase()),
       productCausesProblems,
     };
     addMutation.mutate(newProduct);
@@ -40,7 +40,7 @@ const NewProductForm = forwardRef(({ handleClose }, ref) => {
   };
 
   return (
-    <Box sx={(theme) => theme.components.Modal} ref={ref} tabIndex={-1}>
+    <Box sx={(theme) => ({...theme.components.Modal, width: matches ? "unset" : "100%" })} ref={ref} tabIndex={-1}>
       <form onSubmit={handleAdd}>
         <Typography variant="h4" gutterBottom style={{ color: "#FF7F50" }}>
           Add product
@@ -63,9 +63,7 @@ const NewProductForm = forwardRef(({ handleClose }, ref) => {
           onChange={(e) => setProductIngredients(e.target.value)}
           required
         />
-        <IngredientOCRWithCrop
-          {...{ productIngredients, setProductIngredients }}
-        />
+        <IngredientOCRWithCrop {...{ productIngredients, setProductIngredients }} />
         <div>
           <FormControl component="fieldset" margin="normal">
             <FormLabel component="legend">Causes problems</FormLabel>
