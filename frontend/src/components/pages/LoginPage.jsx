@@ -1,22 +1,21 @@
-import { Box, Paper } from "@mui/material";
+import { Box, Paper, useMediaQuery } from "@mui/material";
 import { SignInPage } from "@toolpad/core/SignInPage";
 
 function LoginPage() {
   const providers = [{ id: "google", name: "Google" }];
+  const matches = useMediaQuery("(min-width:670px)");
 
   const handleLogin = () => {
     window.location.href = "http://localhost:8080/auth/google";
   };
 
   return (
-    <Box sx={{ padding: "5rem" }}>
+    <Box sx={{ padding: "2rem" }}>
       <Paper
         sx={{
           display: "flex",
-          flexDirection: "column",
-          padding: "2rem",
-          pb: "3rem",
-          alignItems: "center",
+          paddingY: "2rem",
+  
         }}
       >
         <SignInPage signIn={handleLogin} providers={providers} />

@@ -4,6 +4,7 @@ import { Box, Button, Container, Modal, theme, Tooltip, useState } from "../inde
 import NewProductForm from "../NewProductForm.jsx";
 import { fillDB, deleteDB } from "../../services/productService";
 import { useMutation, useQueryClient } from "react-query";
+import { useMediaQuery } from "@mui/material";
 
 function LandingPage() {
   const [open, setOpen] = useState(false);
@@ -13,6 +14,7 @@ function LandingPage() {
   const handleAddClick = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const queryClient = useQueryClient();
+  const matches = useMediaQuery("(min-width:670px)");
 
   const mutateDelete = useMutation({
     mutationFn: deleteDB,
@@ -29,7 +31,7 @@ function LandingPage() {
   });
 
   return (
-    <Container>
+    <Container sx={{ p: 0 }}>
       <Info />
       <Box style={{ display: "flex", marginBottom: "24px", gap: "1rem" }}>
         <Button variant="contained" onClick={handleAddClick}>
@@ -42,7 +44,7 @@ function LandingPage() {
         </Tooltip>
       </Box>
       <Modal open={modal} onClose={handleCloseModal}>
-        <Box sx={(theme) => theme.components.Modal}>
+        <Box sx={(theme) => ({ ...theme.components.Modal, width: matches ? "400px" : "100%" })}>
           <Box sx={(theme) => ({ ...theme.typography.subtitle2, mb: 3 })}>
             Are you sure you want to delete all your products from the database and refill it with
             test data?
@@ -69,7 +71,11 @@ function LandingPage() {
           </Button>
         </Box>
       </Modal>
-      <Modal open={open} onClose={handleClose}>
+      <Modal
+        sx={{ alignSelf: "center", maxWidth: matches ? "unset" : "100%" }}
+        open={open}
+        onClose={handleClose}
+      >
         <NewProductForm handleClose={handleClose} />
       </Modal>
       <AllergenProductCards />

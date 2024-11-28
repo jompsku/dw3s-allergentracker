@@ -19,7 +19,7 @@ const theme = createTheme({
     h1: {
       fontFamily: '"Martel", serif',
       color: "white",
-      fontSize: "2.5rem",
+      fontSize: "2rem",
     },
     h2: {
       fontFamily: '"Martel", serif',
@@ -52,15 +52,15 @@ const theme = createTheme({
     },
     Modal: {
       position: "absolute",
+      alignSelf: "center",
       top: "50%",
       left: "50%",
       transform: "translate(-50%, -50%)",
-      width: 400,
       bgcolor: "background.paper",
       boxShadow: 24,
       border: "1px solid #FF7F50",
       borderRadius: "4px",
-      p: 3,
+      p: 2
     },
   },
 });
