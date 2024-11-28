@@ -12,16 +12,15 @@ import {
   AccountCircleSharpIcon,
 } from "./index.js";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth.js";
 
-const pages = [
-  { name: `How it works`, url: "/how-it-works", needsLogin: false },
-];
+const pages = [{ name: `How it works`, url: "/how-it-works", needsLogin: false }];
 
 function Header() {
   const { user, logout } = useAuth();
   const settings = [{ name: "Logout", onClick: logout }];
+  let location = useLocation();
 
   const [anchorElUser, setAnchorElUser] = useState(null);
   const navigate = useNavigate();
@@ -31,6 +30,7 @@ function Header() {
   };
 
   const handleCloseUserMenu = () => {
+    console.log(location);
     setAnchorElUser(null);
   };
 
@@ -61,7 +61,7 @@ function Header() {
             <Box sx={{ flexGrow: 0 }}>
               <Box onClick={handleOpenUserMenu}>
                 {user.name} {"(" + user.email + ")"}
-                <Tooltip title="Open settings">
+                <Tooltip title="Profile">
                   <IconButton sx={{ p: 0 }}>
                     <AccountCircleSharpIcon fontSize="large" />
                   </IconButton>
@@ -85,13 +85,19 @@ function Header() {
               >
                 {settings.map((setting) => (
                   <MenuItem key={setting.name} onClick={setting.onClick}>
-                    <Typography sx={{ textAlign: "center" }}>
-                      {setting.name}
-                    </Typography>
+                    <Typography sx={{ textAlign: "center" }}>{setting.name}</Typography>
                   </MenuItem>
                 ))}
               </Menu>
             </Box>
+          )}
+          {!user && location.pathname !== "/login" && (
+            <Button
+              onClick={() => navigate("/login")}
+              sx={{ my: 2, color: "white", display: "block" }}
+            >
+              Sign in
+            </Button>
           )}
         </Toolbar>
       </Container>
